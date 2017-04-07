@@ -1,0 +1,29 @@
+@media only screen and (max-width: 1024px) {
+	// Responsive Table
+	.table-responsive {
+		width: 100%;
+		margin-bottom: 15px;
+		overflow-y: hidden;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
+		border: 1px solid $color__border-light;
+	}
+
+	.table-responsive > table {
+		margin-bottom: 0;
+	}
+
+	.table-responsive > table {
+		& > thead,
+		& > tbody,
+		& > tfoot {
+			& > tr {
+				& > th,
+				& > td {
+					white-space: nowrap;
+				}
+			}
+		}
+	}
+
+	// Responsive Table End
+}

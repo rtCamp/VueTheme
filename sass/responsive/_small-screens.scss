@@ -1,0 +1,14 @@
+@media only screen and (max-width: 640px) {
+	//Fix of admin bar due to mmenu
+	html.mm-blocking {
+		margin-top: 0 !important;
+
+		#wpadminbar {
+			z-index: -1;
+		}
+
+		.logged-in.admin-bar {
+			margin-top: 46px;
+		}
+	}
+}

@@ -1,0 +1,194 @@
+/*------------------------------------*\
+    #HEADINGS
+\*------------------------------------*/
+
+h1 {
+	@include font-size($font__size-h1, $line-height: true);
+
+	@extend %vertical-rhythm;
+}
+
+h2 {
+	@include font-size($font__size-h2, $line-height: true);
+
+	/*font-weight: 400;*/
+	@extend %vertical-rhythm;
+}
+
+h3 {
+	@include font-size($font__size-h3, $line-height: true);
+
+	@extend %vertical-rhythm;
+}
+
+h4 {
+	@include font-size($font__size-h4, $line-height: true);
+
+	@extend %vertical-rhythm;
+}
+
+h5 {
+	@include font-size($font__size-h5, $line-height: true);
+
+	@extend %vertical-rhythm;
+}
+
+h6 {
+	@include font-size($font__size-h6, $line-height: true);
+
+	@extend %vertical-rhythm;
+}
+
+// Lists
+ul, ol, dd {
+	@extend %vertical-rhythm;
+
+	margin-left: rem-calc($font__base-line-height);
+}
+
+li > ul,
+li > ol {
+	margin-bottom: 0;
+}
+
+/**
+ * Crude table styles; tables are very difficult to keep on the baseline.
+ */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+
+	@extend %vertical-rhythm;
+
+	width: 100%;
+}
+
+.table-responsive {
+	min-height: .01%;
+	overflow-x: auto;
+}
+
+th,
+td {
+	border-bottom: 1px solid #E1E1E1;
+	padding: $font__base-line-height / 2;
+	text-align: left;
+
+	&:first-child {
+		padding-left: 0;
+	}
+
+	&:last-child {
+		padding-right: 0;
+	}
+}
+
+.rthd-comment-content {
+	th,
+	td {
+		vertical-align: top;
+
+		&:first-child {
+			width: 18%;
+		}
+	}
+}
+
+/**
+ * Paragraphs
+ */
+
+p {
+	@extend %vertical-rhythm;
+}
+
+/**
+ * Not strictly a paragraph, but probably doesnt need its own section.
+ */
+
+address {
+	@extend %vertical-rhythm;
+}
+
+/**
+ * CODE
+ */
+
+pre {
+	background: $color__background-pre;
+	border: 1px solid $color__border-light;
+
+	@extend %vertical-rhythm;
+
+	max-width: 100%;
+	overflow: auto;
+
+	/* Contain overflow in all browsers. */
+	padding: 1rem;
+
+	code.bash,
+	& > code {
+		background: transparent;
+		border: 0;
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+
+	code code.bash {
+		font-size: inherit;
+	}
+}
+
+code {
+	padding: rem-calc(2 6);
+	margin: rem-calc(0 3);
+	font-size: 80%;
+
+	//white-space: nowrap;
+	background: $color__background-pre;
+	border: 1px solid $color__border-light;
+	border-radius: $border-radius;
+}
+
+/**
+ * 1. Fix an odd quirk whereby, without this, code blocks are rendered at a
+ *    font-size smaller than 1em.
+ */
+
+code,
+kbd,
+pre,
+samp {
+	font-family: $font__code;
+
+	/* [1] */
+}
+
+/**
+ * Set up quote marks on quoting elements.
+ */
+
+q,
+blockquote {
+	border-left: 4px solid $light-gray;
+	color: #999;
+	font-style: italic;
+	margin: rem-calc(0 0 $font__base-line-height $font__base-line-height);
+	padding-left: rem-calc(16);
+}
+
+/**
+ * HR
+ */
+
+hr {
+	background-color: $color__background-hr;
+	border: 0;
+	box-sizing: content-box;
+
+	/* Address differences between Firefox and other browsers. Source- normalize.css */
+	height: 1px;
+
+	@extend %vertical-rhythm;
+}

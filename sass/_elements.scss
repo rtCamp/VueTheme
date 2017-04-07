@@ -1,0 +1,197 @@
+html {
+	box-sizing: border-box;
+	-ms-text-size-adjust: 100%;
+
+	/* [5] */
+	-webkit-text-size-adjust: 100%;
+
+	/* [5] */
+	color: $color__primary;
+
+	/* [additional] */
+}
+
+*,
+*:before,
+*:after {
+	/* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+	box-sizing: inherit;
+}
+
+/**
+ * 1. Fallback for when there is no custom background color defined. [WordPress]
+ * 2. Remove default margin. [normalize.css]
+ * 3. Set the base elements `font-size` to the value of your choosing.
+ * 4. Work out the unitless `line-height` for your project based around your
+ *    desired `line-height` (defined previously in pixels), and your projects
+ *    base font size.
+ */
+
+body {
+	background: $color__background-body;
+
+	/* [1] */
+	// background-size: 100% auto;
+	margin: 0;
+
+	/* [2] */
+	font-family: $font__main;
+
+	@include font-size($line-height: true);
+
+	/* [3] */
+
+	/* [4] */
+
+	// WP Editor
+	&.mce-content-body {
+		font-family: inherit;
+		margin: 15px;
+	}
+}
+
+blockquote, q {
+	quotes: "" "";
+
+	&:before,
+	&:after {
+		content: "";
+	}
+}
+
+img {
+	height: auto;
+
+	/* Make sure images are scaled correctly. */
+	max-width: 100%;
+	vertical-align: middle;
+
+	/* Adhere to container width. */
+}
+
+figure {
+	max-width: 100%;
+}
+
+/* Default Links */
+a {
+	// Self, Active & Visited
+	& {
+		color: $color__link;
+		text-decoration: none;
+	}
+
+	transition: 0.3s;
+
+	// Hover
+	&:hover {
+		color: $color__link-hover;
+	}
+}
+
+/*---------------------------
+		Lists & Tables
+---------------------------*/
+
+ul,
+ol {
+	margin: rem-calc(0 0 18 18);
+
+	&.no-bullet {
+		&,
+		ul,
+		ol {
+			list-style: none;
+		}
+	}
+}
+
+li > ul,
+li > ol {
+	margin-bottom: 0;
+	margin-left: 1.5rem;
+}
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	margin: 0 1.5rem 1.5rem;
+}
+
+/*---------------------------
+		Buttons
+---------------------------*/
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	border: 1px solid;
+	border-color: $color__border-button;
+	border-radius: $border-radius;
+	background: $color__background-button;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 15px 17px rgba(255, 255, 255, 0.5), inset 0 -5px 12px rgba(0, 0, 0, 0.05);
+	color: rgba(0, 0, 0, 0.8);
+	line-height: 1;
+	padding: .6rem 1rem .4rem;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+	font-family: $font__main;
+
+	&:hover {
+		border-color: $color__border-button-hover;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 15px 17px rgba(255, 255, 255, 0.8), inset 0 -5px 12px rgba(0, 0, 0, 0.02);
+	}
+
+	&:active,
+	&:focus {
+		border-color: $color__border-button-focus;
+		box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.5), inset 0 2px 5px rgba(0, 0, 0, 0.15);
+	}
+}
+
+/*---------------------------
+		Fields
+---------------------------*/
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+textarea {
+	color: $color__text-input;
+	border: 1px solid $color__border-input;
+	border-radius: $border-radius;
+	font-family: $font__main;
+	line-height: $font__line-height-body;
+
+	&:focus {
+		color: $color__text-input-focus;
+	}
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"] {
+	padding: 3px;
+}
+
+select {
+	color: $color__select-text;
+	font-family: $font__main;
+	font-size: $font__base-font-size;
+	line-height: $font__line-height-body;
+}
+
+textarea {
+	max-width: 100%;
+	line-height: $font__line-height-body;
+	outline: none;
+	background: $color__background-textarea;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1) inset;
+}
