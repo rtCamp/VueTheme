@@ -1,4 +1,12 @@
-/**
+/*
+Theme Name: RT Vue Theme - DEV
+Theme URI: http://rtcamp.com
+Author: rtCamp
+Author URI: http://rtcamp.com
+Description: A WordPress theme with Vue.js and REST API
+Version: 1.0.0
+License: MIT
+*//**
  * Import Zurb Foundation Grid
  * Ref. http://foundation.zurb.com/sites/docs/sass.html
  **//**
@@ -708,7 +716,7 @@ sub {
 		Fields
 ---------------------------*/input[type="text"],input[type="email"],input[type="url"],input[type="password"],input[type="search"],input[type="tel"],textarea {color: #666;border: 1px solid #ccc;border-radius: 0.1875rem;font-family: sans-serif;line-height: 1.5;}input[type="text"]:focus,input[type="email"]:focus,input[type="url"]:focus,input[type="password"]:focus,input[type="search"]:focus,input[type="tel"]:focus,textarea:focus {color: #111;}input[type="text"],input[type="email"],input[type="url"],input[type="password"],input[type="search"] {padding: 3px;}select {color: #404040;font-family: sans-serif;font-size: 16px;line-height: 1.5;}textarea {max-width: 100%;line-height: 1.5;outline: none;background: #fafafa;box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1) inset;}/*--------------------------------------------------------------
 # Site Layout
---------------------------------------------------------------*/.column,.columns {background-color: #FFFFFF;}/*--------------------------------------------------------------
+--------------------------------------------------------------*//*--------------------------------------------------------------
 # Navigation
 --------------------------------------------------------------*//*--------------------------------------------------------------
 # Header
@@ -716,7 +724,7 @@ sub {
 # Banner
 --------------------------------------------------------------*//*--------------------------------------------------------------
 ## Posts and pages
---------------------------------------------------------------*/.sticky {display: block;}.hentry {margin: 0 0 1.5rem;}.byline,.updated:not(.published) {display: none;}.single .byline,.group-blog .byline {display: inline;}.page-content,.entry-content,.entry-summary {margin: 1.5rem 0 0;}.page-links {clear: both;margin: 0 0 1.5rem;}.site-main {background: #FFFFFF;padding: 0.9375rem;}.blank-theme-pagination {text-align: center;}.line {background: #dee6f2;position: relative;height: 0.125rem;margin-bottom: 0.625rem;width: 100%;}.line:before {content: '';background: #a9a8b5;width: 30%;height: 0.125rem;position: absolute;}.rt-post .rt-post-title {margin: 0.625rem 0;font-size: 1.125rem;font-weight: 600;}.rt-post .rt-post-content {font-weight: 500;font-size: 1rem;}.rt-post .rt-post-btn {padding: 0.3125rem;background-color: #ccc;margin-bottom: 0.625rem;float: right;color: #000000;}.rt-post .rt-post-btn:hover {opacity: 0.6;}/*--------------------------------------------------------------
+--------------------------------------------------------------*/.sticky {display: block;}.hentry {margin: 0 0 1.5rem;}.byline,.updated:not(.published) {display: none;}.single .byline,.group-blog .byline {display: inline;}.page-content,.entry-content,.entry-summary {margin: 1.5rem 0 0;}.page-links {clear: both;margin: 0 0 1.5rem;}.site-main {background: #FFFFFF;padding: 0.9375rem;}.line {background: #dee6f2;position: relative;height: 0.125rem;margin-bottom: 0.625rem;width: 100%;}.line:before {content: '';background: #a9a8b5;width: 30%;height: 0.125rem;position: absolute;}.rt-post {height: 100%;width: 100%;padding: 0.625rem;background-color: #FFFFFF;}.rt-post .rt-post-title {margin: 0.625rem 0;font-weight: 600;}.rt-post .rt-post-content {font-weight: 500;font-size: 1rem;}.rt-post .rt-post-btn {padding: 0.3125rem;background-color: #ccc;margin-bottom: 0.625rem;float: right;color: #000000;}.rt-post .rt-post-btn:hover {opacity: 0.6;}.rt-main .column,.rt-main .columns {margin-bottom: 0.9375rem;}/*--------------------------------------------------------------
 ## Widgets
 --------------------------------------------------------------*//*--------------------------------------------------------------
 ## Comments

@@ -4,7 +4,7 @@
 
 <template>
 
-    <div class="row">
+    <div class="row rt-main">
         <post v-for="post in posts" :post="post"></post>
     </div>
 </template>

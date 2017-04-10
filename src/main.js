@@ -1,10 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import VueMaterial from 'vue-material'
 
-
-//Use vue material
-Vue.use( VueMaterial );
 //Use vue route
 Vue.use(VueRouter)
 

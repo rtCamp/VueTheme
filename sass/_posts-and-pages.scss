@@ -32,10 +32,6 @@
 	padding: rem-calc(15);
 }
 
-.blank-theme-pagination {
-	text-align: center;
-}
-
 .line {
 	background: #dee6f2;
 	position: relative;
@@ -51,9 +47,14 @@
 	position:absolute;
 }
 .rt-post{
+
+	height: 100%;
+    width: 100%;
+	padding: rem-calc(10);
+    background-color: $white;
+
 	.rt-post-title{
 		margin: rem-calc(10) 0;
-		font-size: rem-calc(18);
 		font-weight: $SemiBold;
 	}
 	.rt-post-content{
@@ -70,5 +71,10 @@
 		&:hover {
 			opacity: 0.6;
 		}
+	}
+}
+.rt-main{
+	.column{
+		margin-bottom: rem-calc(15);
 	}
 }

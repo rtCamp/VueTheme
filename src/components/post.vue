@@ -4,7 +4,7 @@
 
 <template>
 
-		<div class="medium-6 small-12 column rt-post" v-if="!isSingle">
+		<div class="medium-6 small-12 column" v-if="!isSingle">
 
 			<div class="rt-post">
 
@@ -21,9 +21,9 @@
 
 		</div>
 
-		<div class="row" v-else>
+		<div class="row rt-main" v-else>
 
-			<div class="medium-12 small-12 column rt-post" >
+			<div class="medium-12 small-12 column" >
 
 				<div class="rt-post">
 
