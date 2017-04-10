@@ -37,7 +37,6 @@ const router = new VueRouter({
 
 	]
 });
-console.log( 'hello' );
 //Create instatnce of main component
 new App( {
   router

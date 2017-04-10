@@ -160,7 +160,7 @@ $breakpoint-classes: small medium large;
 
 /// Global width of your site. Used by the grid to determine row width.
 /// @type Number
-$grid-row-width: rem-calc(1300);
+$grid-row-width: rem-calc(960);
 
 /// The default column count of a grid. Changing this value affects the logic of the grid mixins, and the number of CSS classes output.
 /// @type Number

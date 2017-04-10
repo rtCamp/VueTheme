@@ -11,7 +11,6 @@
 				<h4 class="rt-post-title"> {{ post.title.rendered }}</h4>
 
 				<!--	<p class="rt-post-link"> {{ post.link }} </p> -->
-				<div class="line"></div>
 
 				<p class="rt-post-excerpt"  v-html="post.excerpt.rendered" > </p>
 
@@ -74,7 +73,7 @@
 
 	data() {
 		return {
-			base_path: wp.base_path,
+			base_path: rtwp.base_path,
 			isSingle: false
 		}
 	},
@@ -82,28 +81,15 @@
 	methods: {
 		getPost:function () {
 
-		var vm = this;
+			var vm = this;
+			wp.api.loadPromise.done( function() {
 
-		var url = wp.root + 'wp/v2/posts/' + vm.$route.params.id;
-		$ = jQuery;
-		$.ajax({
-
-			url: url,
-			type: 'GET',
-			dataType: 'json',
-			contentType: 'application/json; charset=utf-8',
-			success: function (response) {
-
-				vm.post = response;
-				console.log( vm.post );
-
-			},
-			error: function (error) {
-
-				console.log(error);
-			}
-
-		});
+				var post = new wp.api.models.Post( { id: vm.$route.params.id } );
+				post.fetch().done( function (data) {
+					//console.log( data );
+					vm.post = data;
+				});
+			});
 
 		}
 	}
