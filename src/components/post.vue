@@ -65,7 +65,11 @@ export default {
 					id: 0,
 					slug: '',
 					title: { rendered: '' },
-					content: { rendered: '' }
+					content: { rendered: '' },
+					excerpt: { rendered: '' },
+					date:'',
+					_embedded:{ author: [ { name:''} ] }
+
 				}
 			}
 		}
@@ -93,8 +97,8 @@ export default {
 			var vm = this;
 			wp.api.loadPromise.done( function() {
 
-				var post = new wp.api.models.Post( { id: vm.$route.params.id, _embed:'1' } );
-				post.fetch().done( function (data) {
+				var post = new wp.api.models.Post( { id: vm.$route.params.id } );
+				post.fetch( { data: { _embed:'1' } } ).done( function (data) {
 					//console.log( data );
 					vm.post = data;
 				});

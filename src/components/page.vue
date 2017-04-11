@@ -34,8 +34,12 @@ export default {
 
 	data() {
 		return {
-			page:''
+			page:{
+				title: { rendered: '' },
+				content: { rendered: '' }
+			}
 		}
+
 	},
 
 	methods: {
@@ -44,7 +48,7 @@ export default {
 			var vm = this;
 			wp.api.loadPromise.done( function() {
 
-				var post = new wp.api.models.Page( { id: vm.$route.params.id, _embed:'1' } );
+				var post = new wp.api.models.Page( { id: vm.$route.params.id } );
 				post.fetch().done( function (data) {
 					console.log( data );
 					vm.page = data;

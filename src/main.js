@@ -34,7 +34,7 @@ const router = new VueRouter({
 
 		{ path: '/', name:'home',component: posts },
 		{ path: '/post/:id', name:'post', component: post },
-		{ path: '/page/:id', name:'page', component: page },
+		{ path: '/page/:title/:id', name:'page', component: page },
 
 	]
 });

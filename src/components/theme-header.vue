@@ -5,7 +5,7 @@
 			<nav id="site-navigation">
 				<ul>
 					<li v-for="item in menus" v-if="item.type != 'custom'">
-						<router-link :to="{ name: 'page', params: { id:item.object_id }}"> {{ item.title }} </router-link>
+						<router-link :to="{ name: 'page', params: { title:removeSpace( item.title ), id: item.object_id  }}"> {{ item.title }} </router-link>
 					</li>
 				</ul>
 			</nav>
@@ -54,6 +54,13 @@ export default {
 				}
 
 			});
+
+		},
+		removeSpace: function (value) {
+			if( value ) {
+				var str = value.toLowerCase().trim();
+				return str.replace(/\s/g, '-');
+			}
 
 		}
 	}
