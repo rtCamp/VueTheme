@@ -192,3 +192,12 @@ hr {
 
 	@extend %vertical-rhythm;
 }
+
+h1,h2,h3,h4,#site-navigation{
+	font-family:Lato, sans-serif;
+	margin-bottom: rem-calc(10);
+}
+p{
+	text-rendering: optimizeLegibility;
+	line-height: 1.5;	;
+}

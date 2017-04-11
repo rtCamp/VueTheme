@@ -11,12 +11,12 @@ Vue.config.devTools = true;
 import posts from './components/posts.vue'
 Vue.component('posts', posts)
 import post from './components/post.vue'
-Vue.component('Post', post)
+Vue.component('post', post)
 import header from './components/theme-header.vue'
 Vue.component('theme-header', header)
 import footer from './components/theme-footer.vue'
 Vue.component('theme-footer', footer)
-
+import page from './components/page.vue'
 
 //Create main vue component
 var App = Vue.extend({
@@ -34,6 +34,7 @@ const router = new VueRouter({
 
 		{ path: '/', name:'home',component: posts },
 		{ path: '/post/:id', name:'post', component: post },
+		{ path: '/page/:id', name:'page', component: page },
 
 	]
 });

@@ -4,17 +4,29 @@
 
 <template>
 
-		<div class="medium-6 small-12 column" v-if="!isSingle">
+		<div class="medium-12 small-12 column" v-if="!isSingle">
 
 			<div class="rt-post">
 
-				<h4 class="rt-post-title"> {{ post.title.rendered }}</h4>
+				<h2 class="rt-post-title"><router-link :to="{ name: 'post', params: { id: post.id }}"> {{ post.title.rendered }} </router-link> </h2>
+				<div class="rt-meta">
+				<span class="posted-on">
+					Posted On
+					<span class="date">
+						{{ formatDate( post.date ) }}
+					</span>
+				</span>
+				<span class="authormeta">
+					By
+					<span class="author">
+					{{ post._embedded.author[0].name }}
+					</span>
+				</span>
+				</div>
+				<h4></h4>
 
-				<!--	<p class="rt-post-link"> {{ post.link }} </p> -->
+				<div class="rt-post-excerpt rt-content"  v-html="post.excerpt.rendered" > </div>
 
-				<p class="rt-post-excerpt"  v-html="post.excerpt.rendered" > </p>
-
-				<router-link :to="{ name: 'post', params: { id: post.id }}" class="rt-post-btn">Read More </router-link>
 
 			</div>
 
@@ -26,13 +38,10 @@
 
 				<div class="rt-post">
 
-				<h4 class="rt-post-title"> {{ post.title.rendered }}</h4>
+					<h2 class="rt-post-title"> {{ post.title.rendered }}</h2>
 
-				<!--	<p class="rt-post-link"> {{ post.link }} </p> -->
 
-				<div class="line"></div>
-
-				<p class="rt-post-content" v-html="post.content.rendered" ></p>
+					<div class="rt-post-content rt-content" v-html="post.content.rendered" ></div>
 
 
 				</div>
@@ -46,7 +55,7 @@
 </template>
 
 <script>
-	export default {
+export default {
 
 	props: {
 		post: {
@@ -84,13 +93,30 @@
 			var vm = this;
 			wp.api.loadPromise.done( function() {
 
-				var post = new wp.api.models.Post( { id: vm.$route.params.id } );
+				var post = new wp.api.models.Post( { id: vm.$route.params.id, _embed:'1' } );
 				post.fetch().done( function (data) {
 					//console.log( data );
 					vm.post = data;
 				});
 			});
 
+		},
+		formatDate:function ( value ) {
+			if (value) {
+				var date  = new Date( value );
+				var monthNames = [
+				"January", "February", "March",
+				"April", "May", "June", "July",
+				"August", "September", "October",
+				"November", "December"
+				];
+
+				var day = date.getDate();
+				var monthIndex = date.getMonth();
+				var year = date.getFullYear();
+
+				return monthNames[monthIndex] + ',' + day + ' ' + year;
+			}
 		}
 	}
 }

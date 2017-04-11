@@ -6,11 +6,11 @@
 
     <div class="row rt-main">
         <div class="medium-12 small-12 column rt-pagination">
-            <div class="rt-post rt-pagination">
+
                 <a href="#"  v-if="showPrev" v-on:click="rtShowPrev()"> &LT; prev  </a>
                 <a > {{ currentPage }} / {{ totalPages }} </a>
                 <a href="#"  v-if="showNext" v-on:click="rtShowNext()"> more &GT; </a>
-            </div>
+
 
         </div>
         <post v-for="post in posts" :post="post"></post>
@@ -19,7 +19,7 @@
 
 <script>
 
-    export default {
+export default {
 
     	mounted: function() {
 
@@ -53,7 +53,7 @@
                 	//... use the client here
                     var postsCollection = new wp.api.collections.Posts();
                     vm.postCollection = postsCollection;
-                    postsCollection.fetch( { data: { per_page: vm.postPerPage } } ).done( function (data, status, header ) {
+                    postsCollection.fetch( { data: { per_page: vm.postPerPage, _embed:'1' } } ).done( function (data, status, header ) {
                        // console.log( data );
                         vm.posts = data;
                         vm.totalPages = header.getResponseHeader( 'X-WP-TotalPages');
@@ -68,7 +68,7 @@
                 var vm = this;
                 wp.api.loadPromise.done( function() {
                     var postsCollection = vm.postCollection;
-                    postsCollection.fetch( { data: { per_page: vm.postPerPage, page: pageNumber } } ).done( function (data, x ,h ) {
+                    postsCollection.fetch( { data: { per_page: vm.postPerPage, page: pageNumber, _embed:'1' } } ).done( function (data, x ,h ) {
                         vm.posts = data;
                     });
                 });

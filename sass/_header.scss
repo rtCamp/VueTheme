@@ -1,12 +1,12 @@
-.site-header {
-	padding-top: rem-calc(20);
-	padding-bottom: rem-calc(20);
-}
-
-.site-title {
-	margin-bottom: rem-calc(5);
-}
-
-.site-description {
-	margin-bottom: 0;
+#masthead{
+	min-height: rem-calc(50);
+	margin: 0;
+	padding: 0;
+	font-size: rem-calc(16);
+	color: $color__primary;
+	box-shadow: rem-calc(5) 0 rem-calc(10);
+	width: 100%;
+	background-color:$white;
+	font-weight: $SemiBold;
+	text-transform: uppercase;
 }

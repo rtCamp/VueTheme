@@ -27,3 +27,4 @@ if ( function_exists( 'register_nav_menus' ) ) {
 		)
 	);
 }
+add_filter( 'excerpt_more', '__return_false' );
