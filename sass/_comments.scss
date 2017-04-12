@@ -1,0 +1,55 @@
+.comment-content a {
+	word-wrap: break-word;
+}
+
+.bypostauthor {
+	display: block;
+}
+
+//Basic Styling
+.comments-area {
+	.comment-list {
+		padding: 0;
+		margin: 0;
+	}
+
+	.comment-author {
+		img {
+			float: left;
+			margin-right: rem-calc(15);
+		}
+
+		.url {
+			color: $color__primary;
+			text-transform: capitalize;
+		}
+	}
+
+	li.comment {
+		border-bottom: 1px solid $color__background-hr;
+		overflow: hidden;
+		margin-bottom: rem-calc(25);
+	}
+
+	li.comment:last-child {
+		border-bottom: none;
+	}
+
+	.comment-body {
+		margin-bottom: rem-calc(20);
+
+		p {
+			margin-bottom: rem-calc(5);
+		}
+	}
+
+	ol.children {
+		margin-bottom: 0;
+	}
+}
+
+.comment-form-comment {
+	textarea {
+		width: 100%;
+	}
+}

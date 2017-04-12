@@ -1,0 +1,18 @@
+#masthead{
+	min-height: rem-calc(50);
+	margin: 0;
+	padding: 0;
+	font-size: rem-calc(16);
+	color: $color__primary;
+	box-shadow: rem-calc(5) 0 rem-calc(10);
+	width: 100%;
+	background-color:$white;
+	font-weight: $SemiBold;
+	text-transform: uppercase;
+}
+#primary-nav-button div{
+	width: rem-calc(20);
+	height: rem-calc(3);
+	background-color: black;
+	margin: rem-calc(6) 0;
+}
