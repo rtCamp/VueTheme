@@ -5,7 +5,7 @@
 			<nav id="site-navigation">
 				<ul>
 					<li v-for="item in menus" v-if="item.type != 'custom'">
-						<router-link :to="{ name: 'page', params: { title:removeSpace( item.title ), id: item.object_id  }}"> {{ item.title }} </router-link>
+						 <router-link :to="{ name: 'page', params: { name: getUrlName( item.url ) }}"> {{ item.title }} </router-link>
 					</li>
 				</ul>
 			</nav>
@@ -32,7 +32,7 @@ export default {
 		getMenu: function () {
 
 			var vm = this;
-			var url =  rtwp.root + 'wp-api-menus/v2/menu-locations/primary-menu';
+			var url =  rtwp.root + 'wp-api-menus/v2/menu-locations/primary-menu?_embed=true';
 			$ = jQuery;
 
 			$.ajax({
@@ -56,13 +56,14 @@ export default {
 			});
 
 		},
-		removeSpace: function (value) {
-			if( value ) {
-				var str = value.toLowerCase().trim();
-				return str.replace(/\s/g, '-');
-			}
+		getUrlName:function( url ) {
 
+			var array = url.split('/');
+			var lastsegment = array[array.length-2];
+			return lastsegment;
 		}
+
+
 	}
 
 }

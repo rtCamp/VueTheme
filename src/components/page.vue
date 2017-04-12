@@ -4,7 +4,7 @@
 
 <template>
 
-<div class="row rt-main" >
+<div class="row rt-main" v-if="loaded == 'true'">
 
 	<div class="medium-12 small-12 column" >
 
@@ -34,10 +34,8 @@ export default {
 
 	data() {
 		return {
-			page:{
-				title: { rendered: '' },
-				content: { rendered: '' }
-			}
+			page:{},
+			loaded:'false'
 		}
 
 	},
@@ -48,10 +46,11 @@ export default {
 			var vm = this;
 			wp.api.loadPromise.done( function() {
 
-				var post = new wp.api.models.Page( { id: vm.$route.params.id } );
-				post.fetch().done( function (data) {
+				var post = new wp.api.models.Page();
+				post.fetch( { data: { _embed:'1', slug:vm.$route.params.name } } ).done( function (data) {
 					console.log( data );
-					vm.page = data;
+					vm.page = data[0];
+					vm.loaded = 'true';
 				});
 			});
 

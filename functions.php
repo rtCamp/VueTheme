@@ -7,7 +7,10 @@ function rest_theme_scripts() {
 
 	$base_url  = esc_url_raw( home_url() );
 	$base_path = rtrim( parse_url( $base_url, PHP_URL_PATH ), '/' );
+
 	wp_enqueue_script( 'rest-theme-vue', get_template_directory_uri() . '/dist/build.js', array( 'jquery', 'wp-api' ), '1.0.0', true );
+
+	//wp_enqueue_script( 'rest-theme-vue', 'http://localhost:8081/dist/build.js', array( 'jquery', 'wp-api' ), '1.0.0', true );
 	wp_localize_script( 'rest-theme-vue', 'rtwp', array(
 		'root'      => esc_url_raw( rest_url() ),
 		'base_url'  => $base_url,
@@ -28,3 +31,10 @@ if ( function_exists( 'register_nav_menus' ) ) {
 	);
 }
 add_filter( 'excerpt_more', '__return_false' );
+
+add_action( 'after_setup_theme', function () {
+	global $wp_rewrite;
+	$wp_rewrite->permalink_structure = $wp_rewrite->root . 'post/%postname%/';
+	$wp_rewrite->page_structure      = $wp_rewrite->root . 'page/%pagename%/';
+	$wp_rewrite->front               = $wp_rewrite->root;
+} );

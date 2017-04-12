@@ -33,8 +33,8 @@ const router = new VueRouter({
 	routes: [
 
 		{ path: '/', name:'home',component: posts },
-		{ path: '/post/:id', name:'post', component: post },
-		{ path: '/page/:title/:id', name:'page', component: page },
+		{ path: '/post/:name', name:'post', component: post },
+		{ path: '/page/:name', name:'page', component: page },
 
 	]
 });

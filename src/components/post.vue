@@ -4,35 +4,7 @@
 
 <template>
 
-		<div class="medium-12 small-12 column" v-if="!isSingle">
-
-			<div class="rt-post">
-
-				<h2 class="rt-post-title"><router-link :to="{ name: 'post', params: { id: post.id }}"> {{ post.title.rendered }} </router-link> </h2>
-				<div class="rt-meta">
-				<span class="posted-on">
-					Posted On
-					<span class="date">
-						{{ formatDate( post.date ) }}
-					</span>
-				</span>
-				<span class="authormeta">
-					By
-					<span class="author">
-					{{ post._embedded.author[0].name }}
-					</span>
-				</span>
-				</div>
-				<h4></h4>
-
-				<div class="rt-post-excerpt rt-content"  v-html="post.excerpt.rendered" > </div>
-
-
-			</div>
-
-		</div>
-
-		<div class="row rt-main" v-else>
+		<div class="row rt-main" v-if="loaded == 'true'">
 
 			<div class="medium-12 small-12 column" >
 
@@ -57,37 +29,17 @@
 <script>
 export default {
 
-	props: {
-		post: {
-			type: Object,
-			default() {
-					return {
-					id: 0,
-					slug: '',
-					title: { rendered: '' },
-					content: { rendered: '' },
-					excerpt: { rendered: '' },
-					date:'',
-					_embedded:{ author: [ { name:''} ] }
-
-				}
-			}
-		}
-	},
-
 	mounted: function() {
 
-		if (!this.post.id) {
-
 			this.getPost();
-			this.isSingle = true;
-		}
 	},
 
 	data() {
 		return {
 			base_path: rtwp.base_path,
-			isSingle: false
+			post:{},
+			loaded:'false'
+
 		}
 	},
 
@@ -97,30 +49,14 @@ export default {
 			var vm = this;
 			wp.api.loadPromise.done( function() {
 
-				var post = new wp.api.models.Post( { id: vm.$route.params.id } );
-				post.fetch( { data: { _embed:'1' } } ).done( function (data) {
+				var post = new wp.api.models.Post( );
+				post.fetch( { data: { _embed:'1', slug:vm.$route.params.name } } ).done( function (data) {
 					//console.log( data );
-					vm.post = data;
+					vm.post = data[0];
+					vm.loaded = 'true';
 				});
 			});
 
-		},
-		formatDate:function ( value ) {
-			if (value) {
-				var date  = new Date( value );
-				var monthNames = [
-				"January", "February", "March",
-				"April", "May", "June", "July",
-				"August", "September", "October",
-				"November", "December"
-				];
-
-				var day = date.getDate();
-				var monthIndex = date.getMonth();
-				var year = date.getFullYear();
-
-				return monthNames[monthIndex] + ',' + day + ' ' + year;
-			}
 		}
 	}
 }

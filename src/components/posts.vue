@@ -13,7 +13,37 @@
 
 
         </div>
-        <post v-for="post in posts" :post="post"></post>
+      <!--  <post v-for="post in posts" :post="post"></post> -->
+
+
+		<div class="medium-12 small-12 column" v-for="post in posts" v-if="loaded == 'true'">
+
+			<div class="rt-post">
+
+				<h2 class="rt-post-title"><router-link :to="{ name: 'post', params: { name:post.slug }}"> {{ post.title.rendered }} </router-link> </h2>
+				<div class="rt-meta">
+				<span class="posted-on">
+					Posted On
+					<span class="date">
+						{{ formatDate( post.date ) }}
+					</span>
+				</span>
+				<span class="authormeta">
+					By
+					<span class="author">
+					{{ post._embedded.author[0].name }}
+					</span>
+				</span>
+				</div>
+				<h4></h4>
+
+				<div class="rt-post-excerpt rt-content"  v-html="post.excerpt.rendered" > </div>
+
+
+			</div>
+
+		</div>
+
     </div>
 </template>
 
@@ -30,7 +60,7 @@ export default {
         data() {
 
         	return {
-                posts: [],
+                posts:{},
                 currentPage: '',
                 prevPage: '',
                 nextPage: '',
@@ -38,7 +68,8 @@ export default {
                 showPrev:'true',
                 postCollection:'',
                 postPerPage: '10',
-                totalPages: ''
+                totalPages: '',
+                loaded:'false'
             }
 
         },
@@ -58,6 +89,7 @@ export default {
                         vm.posts = data;
                         vm.totalPages = header.getResponseHeader( 'X-WP-TotalPages');
                         vm.currentPage = 1;
+                        vm.loaded = 'true';
 					});
 
             	} );
@@ -94,7 +126,24 @@ export default {
 
 					vm.rtChangePage(vm.currentPage);
 				}
-            }
+            },
+            formatDate:function ( value ) {
+                if (value) {
+                    var date  = new Date( value );
+                    var monthNames = [
+                    "January", "February", "March",
+                    "April", "May", "June", "July",
+                    "August", "September", "October",
+                    "November", "December"
+                    ];
+
+                    var day = date.getDate();
+                    var monthIndex = date.getMonth();
+                    var year = date.getFullYear();
+
+                    return monthNames[monthIndex] + ',' + day + ' ' + year;
+                }
+		    }
 
 
         }
