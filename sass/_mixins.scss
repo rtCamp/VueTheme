@@ -1,0 +1,51 @@
+/*
+////
+/// @group Blank-Theme
+////
+*/
+
+/*
+/// Rem output with px fallback
+/// @param {Number} $font-size [$font__base-font-size] - Font size without unit
+/// @param {Number} $line-height [false] - Font line height
+///
+*/
+@mixin font-size($font-size: $font__base-font-size, $line-height: false) {
+	font-size: rem-calc($font-size);
+
+	@if $line-height == true {
+		line-height: ceil($font-size / $font__base-line-height) * $font__base-line-height / $font-size;
+	}
+}
+
+/// Center block
+@mixin center-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/// Clearfix
+@mixin clearfix {
+	content: "";
+	display: table;
+}
+
+/// Clear after (not all clearfix need this also)
+@mixin clearfix-after {
+	clear: both;
+}
+@mixin admin-sticky-fix( $offset: 0 ) {
+  $narrow-offset: 46px;
+  $wide-offset: 32px;
+  @if $offset != 0 and type-of($offset) == 'number' {
+    $narrow-offset: $narrow-offset + $offset;
+    $wide-offset: $wide-offset + $offset;
+  }
+  .admin-bar & {
+    top: $narrow-offset;
+    @media screen and (min-width: 783px) {
+      top: $wide-offset;
+    }
+  }
+}

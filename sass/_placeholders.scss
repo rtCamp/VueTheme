@@ -1,0 +1,33 @@
+////
+/// @group Blank-Theme
+////
+
+/// Micro clearfix
+/// Extend the clearfix class with Sass to avoid the `.clearfix` class appearing
+/// over and over in your markup.
+///
+/// @example scss - %clearfix basic usage
+/// .foo { @extend %clearfix; }
+///
+/// @link http://cssmojo.com/latest_new_clearfix_so_far/ Micro clearfix
+///
+%clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+/// Vertical rhythm
+%vertical-rhythm {
+	margin: rem-calc(0 0 $font__base-line-height);
+	padding: 0;
+}
+
+/// Center block
+%center-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
