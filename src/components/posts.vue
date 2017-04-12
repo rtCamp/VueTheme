@@ -13,10 +13,10 @@
 
 
         </div>
-      <!--  <post v-for="post in posts" :post="post"></post> -->
 
+		<transition-group name="slide-fade">
 
-		<div class="medium-12 small-12 column" v-for="post in posts" v-if="loaded == 'true'">
+		<div class="medium-12 small-12 column" v-for="post in posts" v-if="loaded === 'true'" :key="post.slug">
 
 			<div class="rt-post">
 
@@ -43,6 +43,8 @@
 			</div>
 
 		</div>
+
+		</transition-group>
 
     </div>
 </template>
@@ -98,10 +100,12 @@ export default {
             rtChangePage:function(pageNumber) {
 
                 var vm = this;
+                vm.loaded = 'false';
                 wp.api.loadPromise.done( function() {
                     var postsCollection = vm.postCollection;
                     postsCollection.fetch( { data: { per_page: vm.postPerPage, page: pageNumber, _embed:'1' } } ).done( function (data, x ,h ) {
                         vm.posts = data;
+                        vm.loaded = 'true';
                     });
                 });
 
@@ -115,6 +119,7 @@ export default {
                 	vm.currentPage = vm.currentPage + 1;
 
 					vm.rtChangePage(vm.currentPage);
+
 				}
             },
             rtShowPrev:function( event ) {
@@ -125,6 +130,7 @@ export default {
                 	vm.currentPage = vm.currentPage - 1;
 
 					vm.rtChangePage(vm.currentPage);
+
 				}
             },
             formatDate:function ( value ) {

@@ -30,6 +30,7 @@
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^2.1.2",
     "gulp-watch": "^4.3.11",
+    "jquery.mmenu": "^5.7.8",
     "path": "^0.12.7",
     "vue-loader": "^11.1.4",
     "vue-template-compiler": "^2.2.1",

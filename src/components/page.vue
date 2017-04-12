@@ -3,8 +3,8 @@
 </style>
 
 <template>
-
-<div class="row rt-main" v-if="loaded == 'true'">
+<transition name="slide-fade">
+<div class="row rt-main" v-if="loaded ==='true'">
 
 	<div class="medium-12 small-12 column" >
 
@@ -20,7 +20,7 @@
 	</div>
 
 </div>
-
+</transition>
 
 
 </template>
@@ -44,6 +44,7 @@ export default {
 		getPage:function () {
 
 			var vm = this;
+			vm.loaded = 'false'
 			wp.api.loadPromise.done( function() {
 
 				var post = new wp.api.models.Page();

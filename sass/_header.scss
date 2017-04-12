@@ -10,3 +10,9 @@
 	font-weight: $SemiBold;
 	text-transform: uppercase;
 }
+#primary-nav-button div{
+	width: rem-calc(20);
+	height: rem-calc(3);
+	background-color: black;
+	margin: rem-calc(6) 0;
+}

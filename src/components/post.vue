@@ -4,7 +4,7 @@
 
 <template>
 
-		<div class="row rt-main" v-if="loaded == 'true'">
+		<div class="row rt-main" v-if="loaded === 'true'">
 
 			<div class="medium-12 small-12 column" >
 

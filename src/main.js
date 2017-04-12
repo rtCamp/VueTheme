@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-
 //Use vue route
 Vue.use(VueRouter)
 
