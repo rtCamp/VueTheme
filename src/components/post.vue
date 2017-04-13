@@ -38,7 +38,8 @@ export default {
 		return {
 			base_path: rtwp.base_path,
 			post:{},
-			loaded:'false'
+			loaded:'false',
+			pageTitle:''
 
 		}
 	},
@@ -54,6 +55,8 @@ export default {
 					//console.log( data );
 					vm.post = data[0];
 					vm.loaded = 'true';
+					vm.pageTitle = vm.post.title.rendered;
+					vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
 				});
 			});
 
