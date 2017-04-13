@@ -28,12 +28,14 @@
 						{{ formatDate( post.date ) }}
 					</span>
 				</span>
+				<!--
 				<span class="authormeta">
 					By
 					<span class="author">
 					{{ post._embedded.author[0].name }}
 					</span>
 				</span>
+				-->
 				</div>
 				<h4></h4>
 
@@ -86,7 +88,7 @@ export default {
                 	//... use the client here
                     var postsCollection = new wp.api.collections.Posts();
                     vm.postCollection = postsCollection;
-                    postsCollection.fetch( { data: { per_page: vm.postPerPage, _embed:'1' } } ).done( function (data, status, header ) {
+                    postsCollection.fetch( { data: { per_page: vm.postPerPage } } ).done( function (data, status, header ) {
                        // console.log( data );
                         vm.posts = data;
                         vm.totalPages = header.getResponseHeader( 'X-WP-TotalPages');
@@ -103,7 +105,7 @@ export default {
                 vm.loaded = 'false';
                 wp.api.loadPromise.done( function() {
                     var postsCollection = vm.postCollection;
-                    postsCollection.fetch( { data: { per_page: vm.postPerPage, page: pageNumber, _embed:'1' } } ).done( function (data, x ,h ) {
+                    postsCollection.fetch( { data: { per_page: vm.postPerPage, page: pageNumber } } ).done( function (data, x ,h ) {
                         vm.posts = data;
                         vm.loaded = 'true';
                     });

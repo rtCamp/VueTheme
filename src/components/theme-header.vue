@@ -40,7 +40,7 @@ export default {
 		getMenu: function () {
 
 			var vm = this;
-			var url =  rtwp.root + 'wp-api-menus/v2/menu-locations/primary-menu?_embed=true';
+			var url =  rtwp.root + 'wp-api-menus/v2/menu-locations/primary-menu';
 			$ = jQuery;
 
 			$.ajax({
