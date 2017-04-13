@@ -35,7 +35,8 @@ export default {
 	data() {
 		return {
 			page:{},
-			loaded:'false'
+			loaded:'false',
+			pageTitle:''
 		}
 
 	},
@@ -52,6 +53,8 @@ export default {
 					console.log( data );
 					vm.page = data[0];
 					vm.loaded = 'true';
+					vm.pageTitle = vm.page.title.rendered;
+					vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
 				});
 			});
 
