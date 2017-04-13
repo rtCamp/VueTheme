@@ -14,7 +14,7 @@
 
         </div>
 
-		<transition-group name="slide-fade">
+		<transition-group name="slide-fade" class="row">
 
 		<div class="medium-12 small-12 column" v-for="post in posts" v-if="loaded === 'true'" :key="post.slug">
 
@@ -73,7 +73,8 @@ export default {
                 postCollection:'',
                 postPerPage: '10',
                 totalPages: '',
-                loaded:'false'
+                loaded:'false',
+				pageTitle:''
             }
 
         },
@@ -94,6 +95,8 @@ export default {
                         vm.totalPages = header.getResponseHeader( 'X-WP-TotalPages');
                         vm.currentPage = 1;
                         vm.loaded = 'true';
+                        vm.pageTitle = 'Blog';
+                        vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
 					});
 
             	} );

@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Vuex from 'vuex'
 //Use vue route
+Vue.use(Vuex)
 Vue.use(VueRouter)
 
 Vue.config.debug = true;
@@ -22,6 +24,15 @@ var App = Vue.extend({
 	template: '<div id="page" class="hfeed site"><theme-header></theme-header>' +
 			  '<main><router-view></router-view></main>' +
 			  '<theme-footer></theme-footer></div>',
+	mounted:function(){
+		//this.rtChangeTitle('');
+	},
+	computed:{
+
+		rtChangeTitle:function (title) {
+			document.title = (title ? title + ' - ' : '') + rtwp.site_name;
+		}
+	}
 });
 
 //Define route for vue app
@@ -37,8 +48,22 @@ const router = new VueRouter({
 
 	]
 });
+
+const store = new Vuex.Store({
+	state: {
+		title: ''
+	},
+	mutations: {
+	rtChangeTitle(state, value) {
+	  // mutate state
+	  state.title = value;
+	  document.title = (state.title ?state. title + ' - ' : '') + rtwp.site_name;
+	}
+}
+})
 //Create instatnce of main component
 new App( {
-  router
+	store,
+	router
 }).$mount('#app');
 
