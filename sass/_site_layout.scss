@@ -1,4 +1,6 @@
 body{
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
 	background-color: $white;
 }
 /* Enter and leave animations can use different */
