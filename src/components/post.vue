@@ -50,7 +50,7 @@ export default {
 			wp.api.loadPromise.done( function() {
 
 				var post = new wp.api.models.Post( );
-				post.fetch( { data: { _embed:'1', slug:vm.$route.params.name } } ).done( function (data) {
+				post.fetch( { data: { slug:vm.$route.params.name } } ).done( function (data) {
 					//console.log( data );
 					vm.post = data[0];
 					vm.loaded = 'true';
