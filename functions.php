@@ -1,5 +1,4 @@
 <?php
-add_theme_support( 'title-tag' );
 
 function rest_theme_scripts() {
 
@@ -29,11 +28,16 @@ if ( function_exists( 'register_nav_menus' ) ) {
 		)
 	);
 }
+
 add_filter( 'excerpt_more', '__return_false' );
 
-add_action( 'after_setup_theme', function () {
+add_action( 'after_setup_theme', 'rt_theme_setup' );
+
+function rt_theme_setup() {
 	global $wp_rewrite;
 	$wp_rewrite->permalink_structure = $wp_rewrite->root . 'post/%postname%/';
 	$wp_rewrite->page_structure      = $wp_rewrite->root . 'page/%pagename%/';
 	$wp_rewrite->front               = $wp_rewrite->root;
-} );
+
+	add_theme_support( 'title-tag' );
+}
