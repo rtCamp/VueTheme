@@ -7,9 +7,9 @@
     <div class="row rt-main">
         <div class="medium-12 small-12 column rt-pagination">
 
-                <a href="#"  v-if="showPrev" v-on:click="rtShowPrev()"> &LT; prev  </a>
+                <a href=""  v-if="showPrev" v-on:click.prevent="rtShowPrev()"> &LT; prev  </a>
                 <a > {{ currentPage }} / {{ totalPages }} </a>
-                <a href="#"  v-if="showNext" v-on:click="rtShowNext()"> more &GT; </a>
+                <a href=""  v-if="showNext" v-on:click.prevent="rtShowNext()"> more &GT; </a>
 
 
         </div>
@@ -42,7 +42,7 @@
 				<div class="rt-post-excerpt rt-content"  v-html="post.excerpt.rendered" > </div>
 
 
-			</div>
+			</div>home
 
 		</div>
 
@@ -57,7 +57,12 @@ export default {
 
     	mounted: function() {
 
-            this.getPosts();
+    		var vm = this;
+			if ( vm.$route.params.page ) {
+				vm.getPosts( vm.$route.params.page );
+			} else {
+				vm.getPosts();
+			}
 
         },
 
@@ -81,7 +86,8 @@ export default {
 
         methods: {
 
-            getPosts:function() {
+            getPosts:function(pageNumber=1) {
+            	console.log( 'inside get post' );
 
             	var vm = this;
 
@@ -89,42 +95,41 @@ export default {
                 	//... use the client here
                     var postsCollection = new wp.api.collections.Posts();
                     vm.postCollection = postsCollection;
-                    postsCollection.fetch( { data: { per_page: vm.postPerPage } } ).done( function (data, status, header ) {
+                    postsCollection.fetch( { data: { per_page: vm.postPerPage,page:pageNumber } } ).done( function (data, status, header ) {
                        // console.log( data );
                         vm.posts = data;
                         vm.totalPages = header.getResponseHeader( 'X-WP-TotalPages');
-                        vm.currentPage = 1;
+                        console.log( vm.totalPages );
+
+                        if ( pageNumber <= parseInt( vm.totalPages ) ) {
+
+                        	vm.currentPage = parseInt( pageNumber );
+
+						} else {
+
+                        	vm.$router.push({'name':'home'});
+                        	vm.currentPage = 1;
+
+						}
+
                         vm.loaded = 'true';
                         vm.pageTitle = 'Blog';
                         vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
+
 					});
 
             	} );
 
             },
-            rtChangePage:function(pageNumber) {
-
-                var vm = this;
-                vm.loaded = 'false';
-                wp.api.loadPromise.done( function() {
-                    var postsCollection = vm.postCollection;
-                    postsCollection.fetch( { data: { per_page: vm.postPerPage, page: pageNumber } } ).done( function (data, x ,h ) {
-                        vm.posts = data;
-                        vm.loaded = 'true';
-                    });
-                });
-
-			},
             rtShowNext:function( event ) {
 
                 var vm = this;
 
-                if( vm.postCollection.hasMore() ) {
+                if( vm.currentPage < vm.totalPages ) {
 
                 	vm.currentPage = vm.currentPage + 1;
 
-					vm.rtChangePage(vm.currentPage);
-
+					vm.$router.push({'name':'home', params:{ 'page': vm.currentPage } });
 				}
             },
             rtShowPrev:function( event ) {
@@ -134,7 +139,7 @@ export default {
 
                 	vm.currentPage = vm.currentPage - 1;
 
-					vm.rtChangePage(vm.currentPage);
+					vm.$router.push({'name':'home', params:{ 'page': vm.currentPage } });
 
 				}
             },
@@ -155,8 +160,14 @@ export default {
                     return monthNames[monthIndex] + ',' + day + ' ' + year;
                 }
 		    }
+		},
+		watch: {
 
+			'$route' (to, from) {
+				console.log( 'route changed' );
+				this.getPosts( this.$route.params.page );
+			}
 
-        }
+		}
     }
 </script>

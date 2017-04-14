@@ -29,9 +29,6 @@ var App = Vue.extend({
 	},
 	computed:{
 
-		rtChangeTitle:function (title) {
-			document.title = (title ? title + ' - ' : '') + rtwp.site_name;
-		}
 	}
 });
 
@@ -42,9 +39,10 @@ const router = new VueRouter({
 	base: __dirname,
 	routes: [
 
-		{ path: '/', name:'home',component: posts },
+		{ path: '/rt-vue/:page(\\d+)?', name:'home',component: posts },
 		{ path: '/post/:name', name:'post', component: post },
 		{ path: '/page/:name', name:'page', component: page },
+		{ path: '/', redirect: '/rt-vue' },
 
 	]
 });
