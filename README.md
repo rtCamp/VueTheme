@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/rtCamp/rt-vue-theme.png?label=ready&title=Ready)](https://waffle.io/rtCamp/rt-vue-theme)
 # RT Vue Theme
 In-Progress - WordPress theme using WP REST API and Vue.js 2 by [rtCamp](https://rtcamp.com/)
 
