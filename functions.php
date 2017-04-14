@@ -40,16 +40,19 @@ function rt_theme_setup() {
 	$wp_rewrite->permalink_structure = $wp_rewrite->root . 'blog/%postname%/';
 	$wp_rewrite->page_structure      = $wp_rewrite->root . 'page/%pagename%/';
 	$wp_rewrite->front               = $wp_rewrite->root . 'blog/';
-	$wp_rewrite->add_rule('^blog', 'index.php', 'top');
+	$wp_rewrite->add_rule( '^blog', 'index.php', 'top' );
 }
 
 /**
  * Polyfill for wp_title()
  */
-add_filter( 'wp_title', function ( $title, $sep, $seplocation ) {
+add_filter( 'wp_title','rt_vue_title', 10, 3 );
+
+function rt_vue_title( $title, $sep, $seplocation ) {
+
 	if ( false !== strpos( $title, __( 'Page not found' ) ) ) {
 		$replacement = ucwords( str_replace( '/', ' ', $_SERVER['REQUEST_URI'] ) );
 		$title       = str_replace( __( 'Page not found' ), $replacement, $title );
 	}
 	return $title;
-}, 10, 3 );
+}
