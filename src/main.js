@@ -39,10 +39,10 @@ const router = new VueRouter({
 	base: __dirname,
 	routes: [
 
-		{ path: '/rt-vue/:page(\\d+)?', name:'home',component: posts },
-		{ path: '/post/:name', name:'post', component: post },
+		{ path: '/blog/:page(\\d+)?', name:'home',component: posts },
+		{ path: '/blog/:name', name:'post', component: post },
 		{ path: '/page/:name', name:'page', component: page },
-		{ path: '/', redirect: '/rt-vue' },
+		{ path: '/', redirect: '/blog' },
 
 	]
 });

@@ -42,7 +42,7 @@
 				<div class="rt-post-excerpt rt-content"  v-html="post.excerpt.rendered" > </div>
 
 
-			</div>home
+			</div>
 
 		</div>
 

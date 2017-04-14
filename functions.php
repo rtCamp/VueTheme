@@ -6,7 +6,7 @@ function rest_theme_scripts() {
 
 	$base_url  = esc_url_raw( home_url() );
 	$base_path = rtrim( parse_url( $base_url, PHP_URL_PATH ), '/' );
-	if ( defined( 'RT_VUE_DEV' ) ) {
+	if ( defined( 'RT_VUE_DEV' ) && RT_VUE_DEV ) {
 		wp_enqueue_script( 'rest-theme-vue', 'http://localhost:8081/dist/build.js', array( 'jquery', 'wp-api' ), '1.0.0', true );
 	} else {
 		wp_enqueue_script( 'rest-theme-vue', get_template_directory_uri() . '/dist/build.js', array( 'jquery', 'wp-api' ), '1.0.0', true );
@@ -37,9 +37,9 @@ add_action( 'after_setup_theme', 'rt_theme_setup' );
 
 function rt_theme_setup() {
 	global $wp_rewrite;
-	$wp_rewrite->permalink_structure = $wp_rewrite->root . 'rt-vue/%postname%/';
+	$wp_rewrite->permalink_structure = $wp_rewrite->root . 'blog/%postname%/';
 	$wp_rewrite->page_structure      = $wp_rewrite->root . 'page/%pagename%/';
-	$wp_rewrite->front               = $wp_rewrite->root . 'rt-vue/';
+	$wp_rewrite->front               = $wp_rewrite->root . 'blog/';
 }
 
 /**
