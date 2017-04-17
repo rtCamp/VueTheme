@@ -18,7 +18,9 @@ Vue.component('theme-header', header)
 import footer from './components/theme-footer.vue'
 Vue.component('theme-footer', footer)
 import page from './components/page.vue'
-
+Vue.component( 'page', page )
+import notFound from './components/404.vue'
+Vue.component( 'notFound', notFound );
 //Create main vue component
 var App = Vue.extend({
 	template: '<div id="page" class="hfeed site"><theme-header></theme-header>' +
@@ -43,6 +45,7 @@ const router = new VueRouter({
 		{ path: '/blog/:name', name:'post', component: post },
 		{ path: '/page/:name', name:'page', component: page },
 		{ path: '/', redirect: '/blog' },
+		{ path: '*', component: notFound },
 
 	]
 });
