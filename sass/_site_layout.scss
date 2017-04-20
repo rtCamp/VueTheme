@@ -19,3 +19,7 @@ body{
 .error-not-found{
 	padding-top: rem-calc(20);
 }
+.row:not(.expanded) .row{
+	max-width: 100%;
+	overflow: hidden;
+}
