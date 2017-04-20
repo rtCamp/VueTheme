@@ -66,6 +66,7 @@ export default {
 			totalPages: '',
 			mainPage:'',
 			posts:[],
+			lastScrollTop:'0'
 		}
 	},
 
@@ -117,18 +118,37 @@ export default {
 
 		},
 		handleScroll:function () {
+			var vm = this;
+			var st = $(window).scrollTop();
 			var scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
 			var windowPosition = jQuery(window).scrollTop();
-			jQuery('h2').not('.rtvisited').each( function () {
+			if ( st > parseInt( vm.lastScrollTop ) ){
+			// downscroll code
+				jQuery('h2').not('.rtvisited').each( function () {
 				var el = this;
 				var pos = $( el ).offset().top -windowPosition;
 				var link = $( el ).children('a').attr('href');
-				if ( parseInt(pos) >= 0 && parseInt(pos) <= 10 ) {
+				if ( parseInt(pos) <= 0 ) {
 					history.pushState(null, null, link );
-					jQuery( el ).addClass( "rtvisited" );
+					jQuery( el ).addClass( 'rtvisited' );
 
 				}
-			})
+				})
+			} else {
+			// upscroll code
+				jQuery('.rtvisited').each( function () {
+					var el = this;
+					var pos = $( el ).offset().top -windowPosition;
+					var link = $( el ).children('a').attr('href');
+					if ( parseInt(pos) >= 0 ) {
+						history.pushState(null, null, link );
+						jQuery( el ).removeClass( 'rtvisited' );
+
+					}
+				})
+			}
+			vm.lastScrollTop = st;
+
 		}
 	},
 	created () {
