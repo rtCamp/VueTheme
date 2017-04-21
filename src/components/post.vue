@@ -4,47 +4,109 @@
 
 <template>
 
-		<div class="row rt-main" v-if="loaded === 'true'">
+	<div class="single-post row" v-if="loaded === 'true'">
 
-			<div class="medium-12 small-12 column" v-for="data in post">
+		<article v-for="data in post" class="large-12 medium-12 column">
 
-				<div class="rt-post">
+			<header>
 
-					<h2 class="rt-post-title"><router-link :to="{ name: 'post', params: { name:data.slug }}"> {{ data.title.rendered }} </router-link> </h2>
+				<h2 class="rt-post-title"><router-link :to="{ name: 'post', params: { name:data.slug }}"> {{ data.title.rendered }} </router-link> </h2>
+
+			</header>
 
 
-					<div class="rt-post-content rt-content" v-html="data.content.rendered" ></div>
+			<figure>
+
+			</figure>
+
+			<div class="row">
+
+				<div class="item-meta large-4 medium-4 small-12 column">
+					<div class="share">
+						<h5>Share</h5>
+						<a href="" class="rt-fb" onclick="" target="_blank">
+						<i class="icon-facebook"></i>
+						</a>
+						<a href="" class="rt-tw" onclick="" target="_blank">
+						<i class="icon-twitter"></i>
+						</a>
+						<a href="" class="rt-li" onclick="" target="_blank">
+						<i class="icon-linkedin"></i>
+						</a>
+					</div>
+					<div class="byline">
+
+					</div>
+					<div class="item-timestamp">
+
+					</div>
+				</div>
+
+				<div class="item-body large-8 medium-8 small-12 column" v-html="data.content.rendered">
+				</div>
+
+			</div>
+		</article>
 
 
+
+		<article v-for="data in posts" v-if="data.id != mainPage" class="large-12 medium-12 column">
+
+			<header>
+
+				<h2 class="rt-post-title"><router-link :to="{ name: 'post', params: { name:data.slug }}"> {{ data.title.rendered }} </router-link> </h2>
+
+			</header>
+
+
+			<figure>
+
+			</figure>
+
+			<div class="row">
+
+				<div class="item-meta large-4 medium-4 small-12 column">
+					<div class="share">
+						<h5>Share</h5>
+						<a href="" class="rt-fb" onclick="" target="_blank">
+						<i class="icon-facebook"></i>
+						</a>
+						<a href="" class="rt-tw" onclick="" target="_blank">
+						<i class="icon-twitter"></i>
+						</a>
+						<a href="" class="rt-li" onclick="" target="_blank">
+						<i class="icon-linkedin"></i>
+						</a>
+					</div>
+					<div class="byline">
+
+					</div>
+					<div class="item-timestamp">
+
+					</div>
+				</div>
+
+				<div class="item-body large-8 medium-8 small-12 column" v-html="data.content.rendered">
 				</div>
 
 			</div>
 
-			<div class="medium-12 small-12 column" v-for="data in posts" v-if="data.id != mainPage">
-
-			<div class="rt-post">
-
-				<h2 class="rt-post-title"><router-link :to="{ name: 'post', params: { name:data.slug }}"> {{ data.title.rendered }} </router-link> </h2>
-
-
-				<div class="rt-post-content rt-content" v-html="data.content.rendered" ></div>
-
-
-			</div>
-
-			</div>
+		</article>
 
 		<infinite-loading :on-infinite="onInfinite" ref="infiniteLoading" :key="post">
-			<span slot="no-more">
-			There is no more data :(
-			</span>
+		<span slot="no-more">
+		There is no more data :(
+		</span>
 		</infinite-loading>
-		</div>
+
+	</div>
 
 </template>
 
 <script>
 import InfiniteLoading from 'vue-infinite-loading'
+import _ from 'lodash'
+
 export default {
 
 	components: {
@@ -117,7 +179,8 @@ export default {
 			}
 
 		},
-		handleScroll:function () {
+		handleScroll:_.debounce( function () {
+			console.log( 'scroll' );
 			var vm = this;
 			var st = $(window).scrollTop();
 			var scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
@@ -149,7 +212,7 @@ export default {
 			}
 			vm.lastScrollTop = st;
 
-		}
+		}, 250 )
 	},
 	created () {
 		window.addEventListener('scroll', this.handleScroll);

@@ -78,4 +78,32 @@
 	}
 
 }
+.single-post {
+
+	margin-top: rem-calc(20);
+	.item-meta{
+		h5{
+			text-transform: uppercase;
+			margin-bottom: rem-calc(0) ;
+		}
+		.share{
+			.rt-fb{
+				background-color: #306199;
+			}
+			.rt-tw{
+				background-color: #26c4f1;
+			}
+			.rt-li{
+				background-color: #0077B5;
+			}
+			[class^="icon-"]{
+				color: $white;
+			}
+			a:hover{
+				opacity: 0.8;
+			}
+
+		}
+	}
+}
 

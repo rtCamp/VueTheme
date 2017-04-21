@@ -6,6 +6,7 @@ function rest_theme_scripts() {
 
 	$base_url  = esc_url_raw( home_url() );
 	$base_path = rtrim( parse_url( $base_url, PHP_URL_PATH ), '/' );
+	wp_enqueue_style( 'rt-theme-font', get_template_directory_uri() . '/fontello/css/fontello.css' );
 	if ( defined( 'RT_VUE_DEV' ) && RT_VUE_DEV ) {
 		wp_enqueue_script( 'rest-theme-vue', 'http://localhost:8080/dist/build.js', array( 'jquery', 'wp-api' ), '1.0.0', true );
 	} else {

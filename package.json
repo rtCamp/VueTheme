@@ -9,6 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "vue": "^2.2.1",
     "vue-infinite-loading": "^2.0.4",
     "vue-resource": "^1.2.1",
