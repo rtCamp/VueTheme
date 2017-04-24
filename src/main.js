@@ -47,7 +47,10 @@ const router = new VueRouter({
 		{ path: '/', redirect: '/blog' },
 		{ path: '*', component: notFound },
 
-	]
+	],
+	scrollBehavior (to, from, savedPosition) {
+		return { x: 0, y: 0 }
+	}
 });
 
 const store = new Vuex.Store({

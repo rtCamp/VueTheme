@@ -50,11 +50,11 @@
 
 
 
-		<article v-for="data in posts" v-if="data.id != mainPage" class="large-12 medium-12 column">
+		<article v-for="data in posts" class="large-12 medium-12 column">
 
 			<header>
 
-				<h2 class="rt-post-title"><router-link :to="{ name: 'post', params: { name:data.slug }}"> {{ data.title.rendered }} </router-link> </h2>
+				<h2 class="rt-post-title"><router-link :to="{ name: 'post', params: { name:data.post_name }}"> {{ data.post_title }} </router-link> </h2>
 
 			</header>
 
@@ -86,7 +86,7 @@
 					</div>
 				</div>
 
-				<div class="item-body large-8 medium-8 small-12 column" v-html="data.content.rendered">
+				<div class="item-body large-8 medium-8 small-12 column" v-html="data.post_content">
 				</div>
 
 			</div>
@@ -128,7 +128,8 @@ export default {
 			totalPages: '',
 			mainPage:'',
 			posts:[],
-			lastScrollTop:'0'
+			lastScrollTop:'0',
+			currentPageId:''
 		}
 	},
 
@@ -144,39 +145,50 @@ export default {
 					vm.post = vm.post.concat( data );
 					vm.totalPages = header.getResponseHeader( 'X-WP-TotalPages');
 					vm.mainPage = vm.post[0].id;
+					vm.currentPageId = vm.mainPage;
 					vm.loaded = 'true';
 
 				});
 			});
 
 		},
-		getPost:function (pageNumber=1) {
+		getNextPost:function () {
 
 			var vm = this;
-			wp.api.loadPromise.done( function() {
 
-				var post = new wp.api.models.Post( );
-				post.fetch( { data: { per_page: vm.postPerPage,page:pageNumber } } ).done( function ( data, status, header ) {
+			var vm = this;
+			var url =  rtwp.root + 'rtvue/v1/next/post/' + vm.currentPageId;
+			$ = jQuery;
+			$.ajax({
 
-					vm.posts = vm.posts.concat( data );
-					vm.totalPages = header.getResponseHeader( 'X-WP-TotalPages');
-					vm.currentPage = parseInt( pageNumber );
-					vm.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
-				});
+				url: url,
+				type: 'GET',
+				dataType: 'json',
+				contentType: 'application/json; charset=utf-8',
+
+				success: function (response) {
+
+					var res = response.next;
+					if( '' === res ){
+						vm.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+					}else {
+						vm.posts = vm.posts.concat( res );
+						vm.currentPageId = res.ID;
+						vm.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+					}
+				},
+				error: function (error) {
+
+					console.log(error);
+				}
+
 			});
 
 		},
 		onInfinite:function () {
 
 			var vm = this;
-			if( parseInt( vm.currentPage )  < parseInt( vm.totalPages ) ) {
-
-				vm.currentPage = parseInt( vm.currentPage ) + 1;
-				vm.getPost( vm.currentPage );
-
-			} else {
-				vm.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
-			}
+			vm.getNextPost();
 
 		},
 		handleScroll:_.debounce( function () {
@@ -219,6 +231,16 @@ export default {
 	},
 	destroyed () {
 		window.removeEventListener('scroll', this.handleScroll);
+	},
+	watch: {
+
+		'$route' (to, from) {
+			// react to route changes...
+			this.post=[];
+			this.posts=[];
+			this.getMainPost();
+		}
+
 	}
 }
 </script>

@@ -8,7 +8,7 @@ function rest_theme_scripts() {
 	$base_path = rtrim( parse_url( $base_url, PHP_URL_PATH ), '/' );
 	wp_enqueue_style( 'rt-theme-font', get_template_directory_uri() . '/fontello/css/fontello.css' );
 	if ( defined( 'RT_VUE_DEV' ) && RT_VUE_DEV ) {
-		wp_enqueue_script( 'rest-theme-vue', 'http://localhost:8080/dist/build.js', array( 'jquery', 'wp-api' ), '1.0.0', true );
+			wp_enqueue_script( 'rest-theme-vue', 'http://localhost:8080/dist/build.js', array( 'jquery', 'wp-api' ), '1.0.0', true );
 	} else {
 		wp_enqueue_script( 'rest-theme-vue', get_template_directory_uri() . '/dist/build.js', array( 'jquery', 'wp-api' ), '1.0.0', true );
 	}
@@ -60,4 +60,28 @@ function rt_vue_title( $title, $sep, $seplocation ) {
 		$title       = str_replace( __( 'Page not found' ), $replacement, $title );
 	}
 	return $title;
+}
+
+add_action( 'rest_api_init', 'rt_get_next_post' );
+
+function rt_get_next_post() {
+
+	register_rest_route( 'rtvue/v1', '/next/post/(?P<id>[\d]+)', array(
+		'methods' => 'GET',
+		'callback' => 'rt_next_post',
+	));
+}
+function rt_next_post( WP_REST_Request $request ) {
+	$id = $request->get_param( 'id' );
+	$args = array(
+		'p' => $id,
+	);
+	$query = new WP_Query( $args );
+	$res = [];
+	if ( $query->have_posts() ) {
+		$query->the_post();
+		$res['next'] = get_next_post();
+	}
+	wp_reset_postdata();
+	return $res;
 }
