@@ -24,13 +24,13 @@
 				<div class="item-meta large-4 medium-4 small-12 column">
 					<div class="share">
 						<h5>Share</h5>
-						<a href="" class="rt-fb" onclick="" target="_blank">
+						<a :href="'https://www.facebook.com/sharer/sharer.php?' + base_url  + $route.path " class="rt-fb" onclick="return !window.open(this.href, 'rtLogin', 'width=500,height=500')" target="_blank">
 						<i class="icon-facebook"></i>
 						</a>
-						<a href="" class="rt-tw" onclick="" target="_blank">
+						<a :href="'https://twitter.com/home?status=' + base_url  + $route.path " class="rt-tw" onclick="return !window.open(this.href, 'rtLogin', 'width=500,height=500')" target="_blank">
 						<i class="icon-twitter"></i>
 						</a>
-						<a href="" class="rt-li" onclick="" target="_blank">
+						<a :href="'https://www.linkedin.com/shareArticle?mini=true&url=' + base_url  + $route.path " class="rt-li" onclick="return !window.open(this.href, 'rtLogin', 'width=500,height=500')" target="_blank">
 						<i class="icon-linkedin"></i>
 						</a>
 					</div>
@@ -68,13 +68,13 @@
 				<div class="item-meta large-4 medium-4 small-12 column">
 					<div class="share">
 						<h5>Share</h5>
-						<a href="" class="rt-fb" onclick="" target="_blank">
+						<a :href="'https://www.facebook.com/sharer/sharer.php?' + base_url  + $route.path " class="rt-fb" onclick="return !window.open(this.href, 'rtLogin', 'width=500,height=500')" target="_blank">
 						<i class="icon-facebook"></i>
 						</a>
-						<a href="" class="rt-tw" onclick="" target="_blank">
+						<a :href="'https://twitter.com/home?status=' + base_url  + $route.path " class="rt-tw" onclick="return !window.open(this.href, 'rtLogin', 'width=500,height=500')" target="_blank">
 						<i class="icon-twitter"></i>
 						</a>
-						<a href="" class="rt-li" onclick="" target="_blank">
+						<a :href="'https://www.linkedin.com/shareArticle?mini=true&url=' + base_url  + $route.path " class="rt-li" onclick="return !window.open(this.href, 'rtLogin', 'width=500,height=500')" target="_blank">
 						<i class="icon-linkedin"></i>
 						</a>
 					</div>
@@ -120,7 +120,7 @@ export default {
 
 	data() {
 		return {
-			base_path: rtwp.base_path,
+			base_url: rtwp.base_url	,
 			post:[],
 			loaded:'false',
 			postPerPage: '5',
