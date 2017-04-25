@@ -3,7 +3,7 @@
 </style>
 
 <template>
-	
+
 	<transition name="slide-fade">
 
 		<div class="row rt-main" v-if="loaded === 'true'" >
@@ -23,7 +23,7 @@
 					<span class="posted-on">
 						Posted On
 						<span class="date">
-							{{ formatDate( post.date ) }}
+							{{ formatDate( post ) }}
 						</span>
 					</span>
 					</div>
@@ -143,11 +143,10 @@ export default {
 				}
             },
             formatDate:function ( value ) {
-
+				value = value.date;
                 if (value) {
                     var date  = new Date( value );
-                    var monthNames = [
-                    "January", "February", "March",
+                    var monthNames = ["January", "February", "March",
                     "April", "May", "June", "July",
                     "August", "September", "October",
                     "November", "December"
