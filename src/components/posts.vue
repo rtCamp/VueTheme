@@ -22,8 +22,7 @@
 					<div class="rt-meta">
 					<span class="posted-on">
 						Posted On
-						<span class="date">
-							{{ formatDate( post ) }}
+						<span class="date" v-text="formatDate( post )">
 						</span>
 					</span>
 					</div>
