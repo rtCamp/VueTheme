@@ -3,23 +3,26 @@
 </style>
 
 <template>
+
 <transition name="slide-fade">
-<div class="row rt-main" v-if="loaded ==='true'">
 
-	<div class="medium-12 small-12 column" >
+	<div class="row rt-main" v-if="loaded ==='true'">
 
-		<div class="rt-post">
+		<div class="medium-12 small-12 column" >
 
-			<h2 class="rt-post-title"> {{ page.title.rendered }}</h2>
+			<div class="rt-post">
 
-			<div class="rt-post-content rt-content" v-html="page.content.rendered"></div>
+				<h2 class="rt-post-title"> {{ page.title.rendered }}</h2>
 
+				<div class="rt-post-content rt-content" v-html="page.content.rendered"></div>
+
+
+			</div>
 
 		</div>
 
 	</div>
 
-</div>
 </transition>
 
 
@@ -50,7 +53,6 @@ export default {
 
 				var post = new wp.api.models.Page();
 				post.fetch( { data: { slug:vm.$route.params.name } } ).done( function (data) {
-					console.log( data );
 					vm.page = data[0];
 					vm.loaded = 'true';
 					vm.pageTitle = vm.page.title.rendered;

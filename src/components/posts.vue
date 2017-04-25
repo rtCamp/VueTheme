@@ -3,52 +3,42 @@
 </style>
 
 <template>
+	
+	<transition name="slide-fade">
 
-    <div class="row rt-main">
-        <div class="medium-12 small-12 column rt-pagination">
+		<div class="row rt-main" v-if="loaded === 'true'" >
 
-                <a href=""  v-if="showPrev" v-on:click.prevent="rtShowPrev()"> &LT; prev  </a>
-                <a > {{ currentPage }} / {{ totalPages }} </a>
-                <a href=""  v-if="showNext" v-on:click.prevent="rtShowNext()"> more &GT; </a>
+			<div class="medium-12 small-12 column rt-pagination">
+					<a href=""  v-if="showPrev" v-on:click.prevent="rtShowPrev()"> &LT; prev  </a>
+					<a > {{ currentPage }} / {{ totalPages }} </a>
+					<a href=""  v-if="showNext" v-on:click.prevent="rtShowNext()"> more &GT; </a>
+			</div>
 
+			<div class="medium-12 small-12 column" v-for="post in posts" :key="post.slug">
 
-        </div>
+				<div class="rt-post">
 
-		<transition-group name="slide-fade" class="row">
-
-		<div class="medium-12 small-12 column" v-for="post in posts" v-if="loaded === 'true'" :key="post.slug">
-
-			<div class="rt-post">
-
-				<h2 class="rt-post-title"><router-link :to="{ name: 'post', params: { name:post.slug }}"> {{ post.title.rendered }} </router-link> </h2>
-				<div class="rt-meta">
-				<span class="posted-on">
-					Posted On
-					<span class="date">
-						{{ formatDate( post.date ) }}
+					<h2 class="rt-post-title"><router-link :to="{ name: 'post', params: { name:post.slug }}"> {{ post.title.rendered }} </router-link> </h2>
+					<div class="rt-meta">
+					<span class="posted-on">
+						Posted On
+						<span class="date">
+							{{ formatDate( post.date ) }}
+						</span>
 					</span>
-				</span>
-				<!--
-				<span class="authormeta">
-					By
-					<span class="author">
-					{{ post._embedded.author[0].name }}
-					</span>
-				</span>
-				-->
+					</div>
+
+					<div class="rt-post-excerpt rt-content"  v-html="post.excerpt.rendered" > </div>
+
+
 				</div>
-				<h4></h4>
-
-				<div class="rt-post-excerpt rt-content"  v-html="post.excerpt.rendered" > </div>
-
 
 			</div>
 
 		</div>
 
-		</transition-group>
+	</transition>
 
-    </div>
 </template>
 
 <script>
@@ -58,9 +48,13 @@ export default {
     	mounted: function() {
 
     		var vm = this;
+
 			if ( vm.$route.params.page ) {
+
 				vm.getPosts( vm.$route.params.page );
+
 			} else {
+
 				vm.getPosts();
 			}
 
@@ -69,6 +63,7 @@ export default {
         data() {
 
         	return {
+
                 posts:{},
                 currentPage: '',
                 prevPage: '',
@@ -80,6 +75,7 @@ export default {
                 totalPages: '',
                 loaded:'false',
 				pageTitle:''
+
             }
 
         },
@@ -87,16 +83,19 @@ export default {
         methods: {
 
             getPosts:function(pageNumber=1) {
-            	console.log( 'inside get post' );
 
             	var vm = this;
+				vm.loaded = 'false';
 
             	wp.api.loadPromise.done( function() {
+
                 	//... use the client here
                     var postsCollection = new wp.api.collections.Posts();
                     vm.postCollection = postsCollection;
+
                     postsCollection.fetch( { data: { per_page: vm.postPerPage,page:pageNumber } } ).done( function (data, status, header ) {
                        // console.log( data );
+
                         vm.posts = data;
                         vm.totalPages = header.getResponseHeader( 'X-WP-TotalPages');
                         console.log( vm.totalPages );
@@ -144,6 +143,7 @@ export default {
 				}
             },
             formatDate:function ( value ) {
+
                 if (value) {
                     var date  = new Date( value );
                     var monthNames = [
@@ -159,12 +159,13 @@ export default {
 
                     return monthNames[monthIndex] + ',' + day + ' ' + year;
                 }
+
 		    }
+
 		},
 		watch: {
 
 			'$route' (to, from) {
-				console.log( 'route changed' );
 				this.getPosts( this.$route.params.page );
 			}
 
