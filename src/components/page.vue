@@ -48,18 +48,22 @@ export default {
 		getPage:function () {
 
 			var vm = this;
-			vm.loaded = 'false'
-			wp.api.loadPromise.done( function() {
+			vm.loaded = 'false';
 
-				var post = new wp.api.models.Page();
-				post.fetch( { data: { slug:vm.$route.params.name } } ).done( function (data) {
-					vm.page = data[0];
-					vm.loaded = 'true';
-					vm.pageTitle = vm.page.title.rendered;
-					vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
-				});
-			});
+			vm.$http.get( 'wp/v2/pages', {
+				params:{ slug: vm.$route.params.name }
+			})
+			.then( (res) => {
 
+				vm.page = res.data[0];
+				vm.loaded = 'true';
+				vm.pageTitle = vm.page.title.rendered;
+				vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
+
+			} )
+			.catch( (res) => {
+				console.log( `Something wen wrong : ${res}` );
+			})
 		}
 	},
   	watch: {
