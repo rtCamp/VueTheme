@@ -41,7 +41,6 @@
 </template>
 
 <script>
-
 export default {
 
     	mounted: function() {
@@ -85,38 +84,34 @@ export default {
 
             	var vm = this;
 				vm.loaded = 'false';
+				vm.$http.get( 'wp/v2/posts',{
+					params:{  per_page: vm.postPerPage,page:pageNumber }
+				} )
+				.then( (res) => {
+					console.log( res );
+					vm.posts = res.data;
+					vm.totalPages = res.headers['x-wp-totalpages'];
 
-            	wp.api.loadPromise.done( function() {
+					if ( pageNumber <= parseInt( vm.totalPages ) ) {
 
-                	//... use the client here
-                    var postsCollection = new wp.api.collections.Posts();
-                    vm.postCollection = postsCollection;
+						vm.currentPage = parseInt( pageNumber );
 
-                    postsCollection.fetch( { data: { per_page: vm.postPerPage,page:pageNumber } } ).done( function (data, status, header ) {
-                       // console.log( data );
+					} else {
 
-                        vm.posts = data;
-                        vm.totalPages = header.getResponseHeader( 'X-WP-TotalPages');
-                        console.log( vm.totalPages );
+						vm.$router.push({'name':'home'});
+						vm.currentPage = 1;
 
-                        if ( pageNumber <= parseInt( vm.totalPages ) ) {
+					}
 
-                        	vm.currentPage = parseInt( pageNumber );
+					vm.loaded = 'true';
+					vm.pageTitle = 'Blog';
+					vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
 
-						} else {
+				})
+				.catch( (res) => {
 
-                        	vm.$router.push({'name':'home'});
-                        	vm.currentPage = 1;
-
-						}
-
-                        vm.loaded = 'true';
-                        vm.pageTitle = 'Blog';
-                        vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
-
-					});
-
-            	} );
+					console( `Something wen wrong : ${res}` );
+				})
 
             },
             rtShowNext:function( event ) {

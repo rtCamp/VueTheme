@@ -49,17 +49,22 @@ export default {
 		getPost:function () {
 
 			var vm = this;
-			wp.api.loadPromise.done( function() {
 
-				var post = new wp.api.models.Post( );
-				post.fetch( { data: { slug:vm.$route.params.name } } ).done( function (data) {
-					//console.log( data );
-					vm.post = data[0];
-					vm.loaded = 'true';
-					vm.pageTitle = vm.post.title.rendered;
-					vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
-				});
-			});
+			vm.$http.get( 'wp/v2/posts', {
+				params:{ slug:vm.$route.params.name  }
+			})
+			.then( (res) => {
+
+				vm.post = res.data[0];
+				vm.loaded = 'true';
+				vm.pageTitle = vm.post.title.rendered;
+				vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
+
+			} )
+			.catch( (res) => {
+				console( `Something wen wrong : ${res}` );
+			})
+
 
 		}
 	}

@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex'
+import {HTTP as axios} from './axios/axios'
+Vue.prototype.$http = axios;
 //Use vue route
+
 Vue.use(Vuex)
 Vue.use(VueRouter)
 
@@ -53,9 +56,9 @@ const store = new Vuex.Store({
 	},
 	mutations: {
 	rtChangeTitle(state, value) {
-	  // mutate state
-	  state.title = value;
-	  document.title = (state.title ?state. title + ' - ' : '') + rtwp.site_name;
+		// mutate state
+		state.title = value;
+		document.title = (state.title ?state. title + ' - ' : '') + rtwp.site_name;
 	}
 }
 })
