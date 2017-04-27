@@ -2,11 +2,17 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex'
 import {HTTP as axios} from './axios/axios'
+import VueProgressiveImage from 'progressive-image/dist/vue'
+
+
 Vue.prototype.$http = axios;
 //Use vue route
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
+Vue.use(VueProgressiveImage, {
+  removePreview: true
+})
 
 Vue.config.debug = true;
 Vue.config.devTools = true;
@@ -27,9 +33,9 @@ var App = Vue.extend({
 	template: '<div id="page" class="hfeed site"><theme-header></theme-header>' +
 			  '<main><router-view></router-view></main>' +
 			  '<theme-footer></theme-footer></div>',
-	mounted:function(){
-		//this.rtChangeTitle('');
-	},
+	// mounted:function(){
+	// 	//this.rtChangeTitle('');
+	// },
 	computed:{
 
 	}

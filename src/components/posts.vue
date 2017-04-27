@@ -20,15 +20,20 @@
 
 					<h2 class="rt-post-title"><router-link :to="{ name: 'post', params: { name:post.slug }}"> {{ post.title.rendered }} </router-link> </h2>
 					<div class="rt-meta">
-					<span class="posted-on">
-						Posted On
-						<span class="date" v-text="formatDate( post )">
+						<span class="posted-on">
+							Posted On
+							<span class="date" v-text="formatDate( post )">
+							</span>
 						</span>
-					</span>
+					</div>
+					
+					<div class="progressive full">
+
+						<img class="preview" v-progressive="post.featured_image_src['full'][0]" :data-srcset="post.featured_image_src['srcset']" :src="post.featured_image_src['full'][0]" />
+						
 					</div>
 
-					<div class="rt-post-excerpt rt-content"  v-html="post.excerpt.rendered" > </div>
-
+					<div class="rt-post-excerpt rt-content" v-html="post.excerpt.rendered" > </div>
 
 				</div>
 

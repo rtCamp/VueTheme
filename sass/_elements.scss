@@ -195,3 +195,10 @@ textarea {
 	background: $color__background-textarea;
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1) inset;
 }
+
+/* Progressive-Images */
+.full {
+    width: 100vw;
+    left: 50%;
+    margin-left: -50vw;
+}
