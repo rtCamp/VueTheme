@@ -4,18 +4,19 @@
 
 		<div class="row">
 
-			<div class="column medium-2">
-
+			
+			<div class="column large-10 medium-10 small-10">
 				<router-link :to="{ name: 'home'}" class="site-name"> {{ site_name }} </router-link>
-
 			</div>
 
-			<div class="column medium-10">
+			<div class="column large-2 medium-2 small-2 end">
 
-				<a id="primary-nav-button">
-					Menu
-				</a>
-				<nav v-show="ok" id="site-navigation">
+				<div id="nav-icon1" v-on:click="toggleMenu" v-bind:class="{open: isActive}">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<nav id="site-navigation" v-bind:class="{open: isActive}">
 
 					<ul>
 						<li v-for="item in menus" v-if="item.type != 'custom'">
@@ -45,6 +46,7 @@ export default {
 		return {
 			menus: [],
 			site_name: rtwp.site_name,
+			isActive: false
 
 		}
 	},
@@ -68,6 +70,11 @@ export default {
 			var array = url.split('/');
 			var lastsegment = array[array.length-2];
 			return lastsegment;
+		},
+
+		toggleMenu: function() {
+			console.log("Clicked" + this.isActive);
+			this.isActive = !this.isActive;
 		}
 
 
@@ -77,5 +84,6 @@ export default {
 </script>
 
 <style>
+
 
 </style>

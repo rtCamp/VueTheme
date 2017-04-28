@@ -13,10 +13,13 @@
 
 						<h2 class="rt-post-title"> {{ post.title.rendered }}</h2>
 
-						<div class="progressive full" v-if="post.featured_image_src['full'][0]">
+						<div class="progressive full">
 
-							<img class="lazy" v-progressive="post.featured_image_src['full'][0]" :data-srcset="post.featured_image_src['srcset']" :src="post.featured_image_src['full'][0]" />
-
+							<img class="lazy"
+								v-progressive="post.featured_image_src['full'][0]" 
+								:data-srcset="post.featured_image_src['srcset']" 
+								:src="post.featured_image_src['full'][0]" 
+							/>
 						</div>
 
 						<div class="rt-post-content rt-content" v-html="post.content.rendered" ></div>
