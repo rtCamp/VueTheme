@@ -27,7 +27,7 @@
 						</span>
 					</div>
 					
-					<div class="progressive full">
+					<div class="progressive full" v-if="post.featured_image_src['full'][0]">
 
 						<img class="lazy" v-progressive="post.featured_image_src['full'][0]" :data-srcset="post.featured_image_src['srcset']" :src="post.featured_image_src['full'][0]" />
 						
