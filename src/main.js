@@ -11,7 +11,7 @@ Vue.prototype.$http = axios;
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueProgressiveImage, {
-  removePreview: true
+	removePreview: true
 })
 
 Vue.config.debug = true;
@@ -37,9 +37,8 @@ var App = Vue.extend({
 	// 	//this.rtChangeTitle('');
 	// },
 	computed:{
-
 	}
-});
+})
 
 //Define route for vue app
 //ref : http://router.vuejs.org/en/
@@ -54,20 +53,21 @@ const router = new VueRouter({
 		{ path: '/', redirect: '/blog' },
 
 	]
-});
+})
 
 const store = new Vuex.Store({
 	state: {
 		title: ''
 	},
 	mutations: {
-	rtChangeTitle(state, value) {
-		// mutate state
-		state.title = value;
-		document.title = (state.title ?state. title + ' - ' : '') + rtwp.site_name;
+		rtChangeTitle(state, value) {
+			// mutate state
+			state.title = value;
+			document.title = (state.title ?state. title + ' - ' : '') + rtwp.site_name;
+		}
 	}
-}
 })
+
 //Create instatnce of main component
 new App( {
 	store,

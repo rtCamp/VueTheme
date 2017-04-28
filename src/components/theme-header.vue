@@ -12,11 +12,10 @@
 
 			<div class="column medium-10">
 
-				<a id="primary-nav-button" class="menu-toggle" href="#site-navigation">
+				<a id="primary-nav-button">
 					Menu
 				</a>
-
-				<nav id="site-navigation">
+				<nav v-show="ok" id="site-navigation">
 
 					<ul>
 						<li v-for="item in menus" v-if="item.type != 'custom'">
@@ -46,6 +45,7 @@ export default {
 		return {
 			menus: [],
 			site_name: rtwp.site_name,
+
 		}
 	},
 	methods: {
@@ -57,7 +57,7 @@ export default {
 			vm.$http.get( 'wp-api-menus/v2/menu-locations/primary-menu')
 			.then( (res) => {
 				vm.menus = res.data;
-			} )
+			})
 			.catch( (res) => {
 				console( `Something wen wrong : ${res}` );
 			})

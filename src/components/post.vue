@@ -15,7 +15,7 @@
 
 						<div class="progressive full">
 
-							<img class="preview" v-progressive="post.featured_image_src['full'][0]" :data-srcset="post.featured_image_src['srcset']" :src="post.featured_image_src['full'][0]" />
+							<img class="lazy" v-progressive="post.featured_image_src['full'][0]" :data-srcset="post.featured_image_src['srcset']" :src="post.featured_image_src['full'][0]" />
 
 						</div>
 
@@ -35,7 +35,6 @@
 export default {
 
 	mounted: function() {
-
 			this.getPost();
 	},
 
@@ -45,7 +44,6 @@ export default {
 			post:{},
 			loaded:'false',
 			pageTitle:''
-
 		}
 	},
 
