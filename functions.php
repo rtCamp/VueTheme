@@ -3,7 +3,6 @@
 function rest_theme_scripts() {
 
 	wp_enqueue_style( 'style', get_stylesheet_uri() );
-	wp_enqueue_style( 'vue-progressive-image-css', get_template_directory_uri() . '/node_modules/progressive-image/dist/index.css');
 
 	$base_url  = esc_url_raw( home_url() );
 	$base_path = rtrim( parse_url( $base_url, PHP_URL_PATH ), '/' );
@@ -60,26 +59,26 @@ function rt_vue_title( $title, $sep, $seplocation ) {
 }
 
 // Include featured image in rest api post json response
-add_action( 'rest_api_init', 'add_thumbnail_to_JSON' );
-function add_thumbnail_to_JSON() {
+add_action( 'rest_api_init', 'rt_add_thumbnail' );
+
+function rt_add_thumbnail() {
 	// Add featured image
 	register_rest_field( 'post',
-	    'featured_image_src', //NAME OF THE NEW FIELD TO BE ADDED - you can call this anything
-		    array(
-		        'get_callback'    => 'get_image_src',
-		        'update_callback' => null,
-		        'schema'          => null,
-		         )
-	    );
+		'featured_image_src', //NAME OF THE NEW FIELD TO BE ADDED - you can call this anything
+		array(
+			'get_callback'    => 'get_image_src',
+			'update_callback' => null,
+			'schema'          => null,
+			 )
+	);
 }
-
 // Get featured image
 function get_image_src( $object, $field_name, $request ) {
-    $feat_img_array['full'] = wp_get_attachment_image_src($object['featured_media'], 'full', false);
-    $feat_img_array['thumbnail'] = wp_get_attachment_image_src($object['featured_media'], 'thumbnail', false);
-	$feat_img_array['srcset'] = wp_get_attachment_image_srcset($object['featured_media']);
-	$image = false; 
-    if( is_array($feat_img_array) ) $image = $feat_img_array;
 
-    return $image;
+	$feat_img_array['full'] = wp_get_attachment_image_src( $object['featured_media'], 'full', false );
+	$feat_img_array['thumbnail'] = wp_get_attachment_image_src( $object['featured_media'], 'thumbnail', false );
+	$feat_img_array['srcset'] = wp_get_attachment_image_srcset( $object['featured_media'] );
+	$image = is_array( $feat_img_array ) ? $feat_img_array : 'false';
+	return $image;
+
 }

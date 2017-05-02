@@ -62,7 +62,7 @@ export default {
 
 			} )
 			.catch( (res) => {
-				console.log( `Something wen wrong : ${res}` );
+				console.log( `Something went wrong : ${res}` );
 			})
 		}
 	},

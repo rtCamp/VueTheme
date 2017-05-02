@@ -67,7 +67,7 @@ export default {
 
 			} )
 			.catch( (res) => {
-				console( `Something wen wrong : ${res}` );
+				console.log( `Something went wrong : ${res}` );
 			})
 
 

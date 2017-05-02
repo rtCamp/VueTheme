@@ -10,6 +10,7 @@ Vue.prototype.$http = axios;
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
+
 Vue.use(VueProgressiveImage, {
 	removePreview: true
 })

@@ -1,37 +1,3 @@
-.sticky {
-	display: block;
-}
-
-.hentry {
-	margin: 0 0 1.5rem;
-}
-
-.byline,
-.updated:not(.published) {
-	display: none;
-}
-
-.single .byline,
-.group-blog .byline {
-	display: inline;
-}
-
-.page-content,
-.entry-content,
-.entry-summary {
-	margin: 1.5rem 0 0;
-}
-
-.page-links {
-	clear: both;
-	margin: 0 0 1.5rem;
-}
-
-.site-main {
-	background: $white;
-	padding: rem-calc(15);
-}
-
 .rt-main{
 
 	margin-top: rem-calc(20);
@@ -57,15 +23,6 @@
 
 	.rt-post{
 
-		.rt-post-excerpt{
-
-		}
-		.rt-post-title{
-
-		}
-		.rt-post-content{
-
-		}
 		.rt-content{
 			margin: rem-calc(10) 0;
 			font-size: rem-calc(20);
