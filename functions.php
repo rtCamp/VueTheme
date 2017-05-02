@@ -46,7 +46,7 @@ function rt_custom_rewrite_rule() {
 	$wp_rewrite->front               = $wp_rewrite->root . 'blog/';
 	$wp_rewrite->permalink_structure = $wp_rewrite->root . 'blog/%postname%/';
 	$wp_rewrite->page_structure      = $wp_rewrite->root . 'page/%pagename%/';
-	//$wp_rewrite->add_rule( '^blog', 'index.php', 'top' );
+	$wp_rewrite->add_rule( '^blog', 'index.php', 'top' );
 
 }
 add_action( 'init', 'rt_custom_rewrite_rule' );
