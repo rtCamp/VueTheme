@@ -10,7 +10,7 @@
 	overflow: auto;
 	z-index: 999;
 	&.open {display: block;}
-
+	@include admin-sticky-fix(60);
 	ul {
 		list-style: none;
 		margin: 0;

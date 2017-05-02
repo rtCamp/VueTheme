@@ -36,15 +36,20 @@ add_filter( 'excerpt_more', '__return_false' );
 add_action( 'after_setup_theme', 'rt_theme_setup' );
 
 function rt_theme_setup() {
-	global $wp_rewrite;
 
 	add_theme_support( 'post-thumbnails' );
 
+}
+
+function rt_custom_rewrite_rule() {
+	global $wp_rewrite;
+	$wp_rewrite->front               = $wp_rewrite->root . 'blog/';
 	$wp_rewrite->permalink_structure = $wp_rewrite->root . 'blog/%postname%/';
 	$wp_rewrite->page_structure      = $wp_rewrite->root . 'page/%pagename%/';
-	$wp_rewrite->front               = $wp_rewrite->root . 'blog/';
-	$wp_rewrite->add_rule( '^blog', 'index.php', 'top' );
+	//$wp_rewrite->add_rule( '^blog', 'index.php', 'top' );
+
 }
+add_action( 'init', 'rt_custom_rewrite_rule' );
 
 // Polyfill for wp_title()
 add_filter( 'wp_title','rt_vue_title', 10, 3 );
