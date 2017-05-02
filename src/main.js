@@ -51,6 +51,7 @@ const router = new VueRouter({
 
 	]
 })
+
 //Define vuex store
 const store = new Vuex.Store({
 	state: {
