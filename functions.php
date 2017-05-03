@@ -7,7 +7,7 @@ function rest_theme_scripts() {
 	$base_url  = esc_url_raw( home_url() );
 	$base_path = rtrim( parse_url( $base_url, PHP_URL_PATH ), '/' );
 	if ( defined( 'RT_VUE_DEV' ) && RT_VUE_DEV ) {
-		wp_enqueue_script( 'rest-theme-vue', 'http://localhost:8081/dist/build.js', array( 'jquery' ), '1.0.0', true );
+		wp_enqueue_script( 'rest-theme-vue', 'http://localhost:8080/dist/build.js', array( 'jquery' ), '1.0.0', true );
 	} else {
 		wp_enqueue_script( 'rest-theme-vue', get_template_directory_uri() . '/dist/build.js', array( 'jquery' ), '1.0.0', true );
 	}
@@ -46,11 +46,19 @@ function rt_custom_rewrite_rule() {
 	$wp_rewrite->front               = $wp_rewrite->root . 'blog/';
 	$wp_rewrite->permalink_structure = $wp_rewrite->root . 'blog/%postname%/';
 	$wp_rewrite->page_structure      = $wp_rewrite->root . 'page/%pagename%/';
-	$wp_rewrite->add_rule( '^blog', 'index.php', 'top' );
+	$wp_rewrite->add_rule( '^blog$', 'index.php', 'top' );
 
 }
 add_action( 'init', 'rt_custom_rewrite_rule' );
 
+//Forcing permalink structure
+add_action( 'permalink_structure_changed', 'rt_forcee_perma_struct', 10, 2 );
+
+function rt_forcee_perma_struct( $old, $new ) {
+
+	update_option( 'permalink_structure', 'blog/%postname%' );
+
+}
 // Polyfill for wp_title()
 add_filter( 'wp_title','rt_vue_title', 10, 3 );
 

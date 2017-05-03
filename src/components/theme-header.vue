@@ -72,7 +72,7 @@ export default {
 		getUrlName:function( url ) {
 
 			var array = url.split('/');
-			var lastsegment = array[array.length-2];
+			var lastsegment = array[array.length-1];
 			return lastsegment;
 		},
 
