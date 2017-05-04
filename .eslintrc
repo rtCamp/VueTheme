@@ -2,6 +2,12 @@
 	"env": {
 		"browser": true
 	},
+	"plugins": [
+        "html"
+    ],
+	"settings": {
+		"html/html-extensions": [".html", ".vue", ".php"]  // consider .html and .we files as HTML
+	},
 	"globals": {
 		"_": false,
 		"Backbone": false,
