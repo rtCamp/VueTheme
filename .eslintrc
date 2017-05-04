@@ -6,7 +6,7 @@
         "html"
     ],
 	"settings": {
-		"html/html-extensions": [".html", ".vue", ".php"]  // consider .html and .we files as HTML
+		"html/html-extensions": [".html", ".vue", ".php"]
 	},
 	"globals": {
 		"_": false,
