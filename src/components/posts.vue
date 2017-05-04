@@ -48,123 +48,122 @@
 <script>
 export default {
 
-    	mounted: function() {
+	mounted: function() {
 
-    		var vm = this;
+		const vm = this;
 
-			if ( vm.$route.params.page ) {
+		if ( vm.$route.params.page ) {
 
-				vm.getPosts( vm.$route.params.page );
+			vm.getPosts( vm.$route.params.page );
 
-			} else {
+		} else {
 
-				vm.getPosts();
-			}
+			vm.getPosts();
+		}
 
-        },
+	},
+	data() {
 
-        data() {
+		return {
 
-        	return {
+			posts: {},
+			currentPage: '',
+			prevPage: '',
+			nextPage: '',
+			showNext: 'true',
+			showPrev: 'true',
+			postCollection: '',
+			postPerPage: '10',
+			totalPages: '',
+			loaded: 'false',
+			pageTitle: ''
 
-                posts:{},
-                currentPage: '',
-                prevPage: '',
-                nextPage: '',
-                showNext:'true',
-                showPrev:'true',
-                postCollection:'',
-                postPerPage: '10',
-                totalPages: '',
-                loaded:'false',
-				pageTitle:''
+		};
 
-            }
+	},
 
-        },
+	methods: {
 
-        methods: {
+		getPosts: function( pageNumber = 1 ) {
 
-            getPosts:function(pageNumber=1) {
+			const vm = this;
+			vm.loaded = 'false';
+			vm.$http.get( 'wp/v2/posts', {
+				params: { per_page: vm.postPerPage, page: pageNumber }
+			} )
+			.then( ( res ) => {
+				vm.posts = res.data;
+				vm.totalPages = res.headers[ 'x-wp-totalpages' ];
 
-            	var vm = this;
-				vm.loaded = 'false';
-				vm.$http.get( 'wp/v2/posts',{
-					params:{  per_page: vm.postPerPage,page:pageNumber }
-				} )
-				.then( (res) => {
-					vm.posts = res.data;
-					vm.totalPages = res.headers['x-wp-totalpages'];
+				if ( pageNumber <= parseInt( vm.totalPages ) ) {
 
-					if ( pageNumber <= parseInt( vm.totalPages ) ) {
+					vm.currentPage = parseInt( pageNumber );
 
-						vm.currentPage = parseInt( pageNumber );
+				} else {
 
-					} else {
-
-						vm.$router.push({'name':'home'});
-						vm.currentPage = 1;
-
-					}
-
-					vm.loaded = 'true';
-					vm.pageTitle = 'Blog';
-					vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
-
-				})
-				.catch( (res) => {
-					console.log( `Something went wrong : ${res}` );
-				})
-
-            },
-            rtShowNext:function( event ) {
-
-                var vm = this;
-
-                if( vm.currentPage < vm.totalPages ) {
-
-                	vm.currentPage = vm.currentPage + 1;
-
-					vm.$router.push({'name':'home', params:{ 'page': vm.currentPage } });
-				}
-            },
-            rtShowPrev:function( event ) {
-
-                var vm = this;
-                if ( vm.currentPage != 1 ) {
-
-                	vm.currentPage = vm.currentPage - 1;
-
-					vm.$router.push({'name':'home', params:{ 'page': vm.currentPage } });
+					vm.$router.push( { 'name': 'home' } );
+					vm.currentPage = 1;
 
 				}
-            },
-            formatDate:function ( value ) {
-				value = value.date;
-                if (value) {
-                    var date  = new Date( value );
-                    var monthNames = ["January", "February", "March",
-                    "April", "May", "June", "July",
-                    "August", "September", "October",
-                    "November", "December"
-                    ];
 
-                    var day = date.getDate();
-                    var monthIndex = date.getMonth();
-                    var year = date.getFullYear();
+				vm.loaded = 'true';
+				vm.pageTitle = 'Blog';
+				vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
 
-                    return monthNames[monthIndex] + ',' + day + ' ' + year;
-                }
-
-		    }
+			} )
+			.catch( ( res ) => {
+				//console.log( `Something went wrong : ${ res }` );
+			} );
 
 		},
-		watch: {
+		rtShowNext: function( event ) {
 
-			'$route' (to, from) {
-				this.getPosts( this.$route.params.page );
+			const vm = this;
+
+			if ( vm.currentPage < vm.totalPages ) {
+
+				vm.currentPage = vm.currentPage + 1;
+
+				vm.$router.push( { 'name': 'home', params: { 'page': vm.currentPage } } );
+			}
+		},
+		rtShowPrev: function( event ) {
+
+			const vm = this;
+			if ( vm.currentPage != 1 ) {
+
+				vm.currentPage = vm.currentPage - 1;
+
+				vm.$router.push( { 'name': 'home', params: { 'page': vm.currentPage } } );
+
+			}
+		},
+		formatDate: function( value ) {
+
+			value = value.date;
+			if ( value ) {
+				const date = new Date( value );
+				const monthNames = [ "January", "February", "March",
+					"April", "May", "June", "July",
+					"August", "September", "October",
+					"November", "December" ];
+
+				const day = date.getDate();
+				const monthIndex = date.getMonth();
+				const year = date.getFullYear();
+
+				return monthNames[ monthIndex ] + ',' + day + ' ' + year;
 			}
 
 		}
-    }
+
+	},
+	watch: {
+
+		'$route'( to, from ) {
+			this.getPosts( this.$route.params.page );
+		}
+
+	}
+};
 </script>

@@ -38,40 +38,44 @@
 export default {
 
 	mounted: function() {
-			this.getPost();
+		this.getPost();
 	},
 
 	data() {
 		return {
+
 			base_path: rtwp.base_path,
-			post:{},
-			loaded:'false',
-			pageTitle:''
-		}
+			post: {},
+			loaded: 'false',
+			pageTitle: ''
+		};
 	},
 
 	methods: {
-		getPost:function () {
 
-			var vm = this;
+		getPost: function() {
+
+			const vm = this;
 
 			vm.$http.get( 'wp/v2/posts', {
-				params:{ slug:vm.$route.params.name  }
-			})
-			.then( (res) => {
+				params: { slug: vm.$route.params.name }
+			} )
+			.then( ( res ) => {
 
-				vm.post = res.data[0];
+				vm.post = res.data[ 0 ];
 				vm.loaded = 'true';
 				vm.pageTitle = vm.post.title.rendered;
 				vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
 
 			} )
-			.catch( (res) => {
-				console.log( `Something went wrong : ${res}` );
-			})
+			.catch( ( res ) => {
 
+				//console.log( `Something went wrong : ${res}` );
+
+			} );
 
 		}
+
 	}
-}
+};
 </script>

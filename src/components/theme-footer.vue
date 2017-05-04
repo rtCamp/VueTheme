@@ -6,18 +6,18 @@
 
 export default {
 
-  mounted: function () {
+	mounted: function() {
 
-  },
-  data() {
-      return {
+	},
+	data() {
+		return {
 
-      }
-  },
-  methods: {
+		};
+	},
+	methods: {
 
-  }
-}
+	}
+};
 </script>
 
 <style>

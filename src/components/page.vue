@@ -37,43 +37,44 @@ export default {
 
 	data() {
 		return {
-			page:{},
-			loaded:'false',
-			pageTitle:''
-		}
-
+			page: {},
+			loaded: 'false',
+			pageTitle: ''
+		};
 	},
-
 	methods: {
-		getPage:function () {
+		getPage: function() {
 
-			var vm = this;
+			const vm = this;
 			vm.loaded = 'false';
 
 			vm.$http.get( 'wp/v2/pages', {
-				params:{ slug: vm.$route.params.name }
-			})
-			.then( (res) => {
+				params: { slug: vm.$route.params.name }
+			} )
+			.then( ( res ) => {
 
-				vm.page = res.data[0];
+				vm.page = res.data[ 0 ];
 				vm.loaded = 'true';
 				vm.pageTitle = vm.page.title.rendered;
 				vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
 
 			} )
-			.catch( (res) => {
-				console.log( `Something went wrong : ${res}` );
-			})
+			.catch( ( res ) => {
+
+				//console.log( `Something went wrong : ${ res }` );
+
+			} );
+
 		}
 	},
-  	watch: {
+	watch: {
 
-		'$route' (to, from) {
+		'$route'( to, from ) {
 			// react to route changes...
 			this.getPage();
 		}
 
 	}
 
-}
+};
 </script>

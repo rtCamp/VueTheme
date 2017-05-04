@@ -41,50 +41,47 @@
 <script>
 export default {
 
-	mounted: function () {
+	mounted: function() {
 
 		//console.log( wp.api.collections );
 		this.getMenu();
 	},
 	data() {
 		return {
+
 			menus: [],
 			site_name: rtwp.site_name,
 			isActive: false
 
-		}
+		};
 	},
 	methods: {
 
-		getMenu: function () {
+		getMenu: function() {
 
-			var vm = this;
+			const vm = this;
 
 			vm.$http.get( 'wp-api-menus/v2/menu-locations/primary-menu')
-			.then( (res) => {
+			.then( ( res ) => {
 				vm.menus = res.data;
-			})
-			.catch( (res) => {
-				console.log( `Something went wrong : ${res}` );
-			})
+			} )
+			.catch( ( res ) => {
+				//console.log( `Something went wrong : ${ res }` );
+			} );
 
 		},
-		getUrlName:function( url ) {
+		getUrlName: function( url ) {
 
-			var array = url.split('/');
-			var lastsegment = array[array.length-1];
-			return lastsegment;
+			const array = url.split( '/' );
+			return array[ array.length - 1 ];
 		},
-
 		toggleMenu: function() {
 			//console.log("Clicked" + this.isActive);
-			this.isActive = !this.isActive;
+			this.isActive = ! this.isActive;
 		}
 
-
 	}
-
-}
+};
 </script>
 
 <style>
