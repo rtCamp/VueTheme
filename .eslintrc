@@ -6,7 +6,7 @@
         "html"
     ],
 	"settings": {
-		"html/html-extensions": [".html", ".vue", ".php"]
+		"html/html-extensions": [".html", ".vue" ]
 	},
 	"globals": {
 		"_": false,
