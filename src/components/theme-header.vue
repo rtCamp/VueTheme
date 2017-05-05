@@ -13,11 +13,11 @@
 
 			<div class="column large-2 medium-2 small-2 end">
 
-				<div id="nav-icon1" v-on:click="toggleMenu" v-bind:class="{open: isActive}">
-					<span></span>
-					<span></span>
-					<span></span>
-				</div>
+				<a id="nav-icon1" v-on:click="toggleMenu" v-bind:class="{open: isActive}">
+					<div></div>
+					<div></div>
+					<div></div>
+				</a>
 
 				<nav id="site-navigation" v-bind:class="{open: isActive}">
 

@@ -1,9 +1,9 @@
 /* Style for hamburger menu */
 
 #nav-icon1 {
-	display: inline-block;
 	width: 50px;
-	margin: 13px 0;
+	height: 100%;
+	padding: 9px 0;
 	float: right;
 	-webkit-transform: rotate(0deg);
 	-moz-transform: rotate(0deg);
@@ -13,20 +13,14 @@
 	-moz-transition: .5s ease-in-out;
 	-o-transition: .5s ease-in-out;
 	transition: .5s ease-in-out;
-	cursor: pointer;
-
+	position: relative;
 }
 
-#nav-icon1 span {
-	display: block;
-	position: absolute;
-	height: 5px;
+#nav-icon1 div {
 	width: 100%;
-	background: #444;
-	border-radius: 9px;
-	font-weight: normal;
-	opacity: 1;
-	left: 0;
+	height: 3px;
+	background-color: black;
+	margin: 6px 0;
 	-webkit-transform: rotate(0deg);
 	-moz-transform: rotate(0deg);
 	-o-transform: rotate(0deg);
@@ -37,33 +31,24 @@
 	transition: .25s ease-in-out;
 }
 
-#nav-icon1 span:nth-child(1) {
-	top: 0px;
-}
 
-#nav-icon1 span:nth-child(2) {
-	top: 10px;
-}
-
-#nav-icon1 span:nth-child(3) {
-	top: 20px;
-}
-
-#nav-icon1.open span:nth-child(1) {
-	top: 10px;
+#nav-icon1.open div:nth-child(1) {
+	top: 18px;
+	position: fixed;
 	-webkit-transform: rotate(135deg);
 	-moz-transform: rotate(135deg);
 	-o-transform: rotate(135deg);
 	transform: rotate(135deg);
 }
 
-#nav-icon1.open span:nth-child(2) {
+#nav-icon1.open div:nth-child(2) {
 	opacity: 0;
-	left: -60px;
+	position: fixed;
 }
 
-#nav-icon1.open span:nth-child(3) {
-	top: 10px;
+#nav-icon1.open div:nth-child(3) {
+	top: 18px;
+	position: fixed;
 	-webkit-transform: rotate(-135deg);
 	-moz-transform: rotate(-135deg);
 	-o-transform: rotate(-135deg);
