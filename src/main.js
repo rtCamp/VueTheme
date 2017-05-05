@@ -40,7 +40,6 @@ const App = Vue.extend( {
 //ref : http://router.vuejs.org/en/
 const router = new VueRouter( {
 	mode: 'history',
-	base: __dirname,
 	routes: [
 
 		{ path: '/blog/:page(\\d+)?', name: 'home', component: posts },
