@@ -1,7 +1,8 @@
 language: node_js
 node_js:
-  - "node"
+- node
 script:
-  - "npm run ci"
+- npm run ci
 notifications:
-  slack: rtcamp:uVyXYGYDZpfcVnO7fGEymQ41
+  slack:
+    secure: eaqU2MeDYV7ZpiCBFW1/ybdm2sMu2b2W+4QdB8zjr8hp7+I1Pd6SWG02KPbkfm41nowdQZm/e3s7/taee7+ik/PvmEyKBkUZLB5sgRYqZW+nB4+RhlZvUvaWellC3V+VPMYZy7mDRhXeH5wceDgjBv6lUzKaTjwbtuNzewR9fOHaxuJtDsonmhEnr24Wy+rV7Q01j6SX1ebxHfC2ZuNsJo/P/uPyW5zU6J5y/50CTrMuGKvnLFdraLNeFa9lRP7xN1f0EWtOjQQwNSUZNVQlYPcgoE9CO6pB50CQsBYE0PI0xLQJPX0vWowpNAM7a/ewbvEMp6Q8F7gPt8uqqgI/TN1vjrUHG+aizDLUkNGAKIlCowiikBclHJu4TBhyLV+Z4sdPkTH3jdcXgx76nA5L6WSOub82dgJUIWf+cfdddt2X2gxQkGzWXYQBpQlrwoGDq91FGyPA7hRO+ebzdMhg0yaf/kooFoSHRoykzHU84QwQun57Eg4wc8Pwx+nib5BqTs8tQHyGqdzkVMNeWxCRkP89dD9jVOrAqthHZLPYPOda5I9msmxZDhItbqL+kl665x+8CYEdHmhl12ClIEgXZ0/k1U9mA5oox11uo72JtWmDa+rM2uBJJuvzE6jDsaahuDq3n28uxA8zYkZ7+f0lnGSwzkvoEdsiYkx0j+5YZDI=
