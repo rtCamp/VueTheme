@@ -24,6 +24,9 @@
 
 						<div class="rt-post-content rt-content" v-html="post.content.rendered" ></div>
 
+						<div class="rt-cat-list">
+							<router-link v-for="x in post.cat_name" :to="{ name: 'cat', params: { name:x.slug } }" :key="x.id"> {{ x.name }} </router-link>
+						</div>
 					</div>
 
 				</div>

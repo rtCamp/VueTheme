@@ -93,7 +93,7 @@ function rt_vue_title( $title, $sep, $seplocation ) {
 	return $title;
 }
 
-// Include featured image in rest api post json response
+// Extend rest response
 add_action( 'rest_api_init', 'rt_add_thumbnail' );
 
 function rt_add_thumbnail() {
@@ -108,6 +108,15 @@ function rt_add_thumbnail() {
 			 )
 	);
 
+	register_rest_field( 'post',
+		'cat_name', //NAME OF THE NEW FIELD TO BE ADDED - you can call this anything
+		array(
+			'get_callback'    => 'rt_get_cat_name',
+			'update_callback' => null,
+			'schema'          => null,
+			 )
+	);
+
 }
 // Get featured image
 function get_image_src( $object, $field_name, $request ) {
@@ -117,5 +126,22 @@ function get_image_src( $object, $field_name, $request ) {
 	$feat_img_array['srcset'] = wp_get_attachment_image_srcset( $object['featured_media'] );
 	$image = is_array( $feat_img_array ) ? $feat_img_array : 'false';
 	return $image;
+
+}
+
+function rt_get_cat_name( $object, $field_name, $request ) {
+
+	$cats = $object['categories'];
+	$res = [];
+	$ob = [];
+	foreach ( $cats as $x ) {
+		$cat_id = (int) $x;
+		$cat = get_category( $cat_id );
+		$ob['name'] = $cat->name;
+		$ob['id'] = $cat->term_id;
+		$ob['slug'] = $cat->slug;
+		$res[] = $ob;
+	}
+	return $res;
 
 }
