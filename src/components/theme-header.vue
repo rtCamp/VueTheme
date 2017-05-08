@@ -73,7 +73,7 @@ export default {
 		getUrlName: function( url ) {
 
 			const array = url.split( '/' );
-			return array[ array.length - 1 ];
+			return array[ array.length - 2 ];
 		},
 		toggleMenu: function() {
 			//console.log("Clicked" + this.isActive);

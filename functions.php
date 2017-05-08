@@ -52,9 +52,19 @@ function rt_theme_setup() {
 function rt_custom_rewrite_rule() {
 
 	global $wp_rewrite;
-	$wp_rewrite->front               = $wp_rewrite->root . 'blog/';
-	$wp_rewrite->permalink_structure = $wp_rewrite->root . 'blog/%postname%/';
+
+	$wp_rewrite->front               = $wp_rewrite->root;
+
+	$wp_rewrite->set_permalink_structure( 'blog/%postname%/' );
+
 	$wp_rewrite->page_structure      = $wp_rewrite->root . 'page/%pagename%/';
+
+	$wp_rewrite->author_base         = 'author';
+	$wp_rewrite->author_structure    = '/' . $wp_rewrite->author_base . '/%author%';
+
+	$wp_rewrite->set_category_base( 'category' );
+	$wp_rewrite->set_tag_base( 'tag' );
+
 	$wp_rewrite->add_rule( '^blog$', 'index.php', 'top' );
 
 }
