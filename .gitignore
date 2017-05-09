@@ -69,4 +69,3 @@ Thumbs.db
 sftp-config.json
 *.sublime-project
 *.sublime-workspace
-docker-compose.yml
