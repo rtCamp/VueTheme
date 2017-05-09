@@ -137,10 +137,14 @@ function rt_get_cat_name( $object, $field_name, $request ) {
 	foreach ( $cats as $x ) {
 		$cat_id = (int) $x;
 		$cat = get_category( $cat_id );
-		$ob['name'] = $cat->name;
-		$ob['id'] = $cat->term_id;
-		$ob['slug'] = $cat->slug;
-		$res[] = $ob;
+		if ( is_wp_error( $cat ) ) {
+			$res[] = '';
+		} else {
+			$ob['name'] = isset( $cat->name ) ? $cat->name : '';
+			$ob['id']   = isset( $cat->term_id ) ? $cat->term_id : '';
+			$ob['slug'] = isset( $cat->slug ) ? $cat->slug : '';
+			$res[] = $ob;
+		}
 	}
 	return $res;
 
