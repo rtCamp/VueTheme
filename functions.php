@@ -117,6 +117,15 @@ function rt_add_thumbnail() {
 			 )
 	);
 
+	register_rest_field( 'post',
+        'tag_name',
+        array(
+            'get_callback'    => 'rt_get_tag_name',
+            'update_callback' => null,
+            'schema'          => null,
+            )
+    );
+
 }
 // Get featured image
 function get_image_src( $object, $field_name, $request ) {
@@ -148,4 +157,25 @@ function rt_get_cat_name( $object, $field_name, $request ) {
 	}
 	return $res;
 
+}
+
+function rt_get_tag_name($object, $field_name, $request) {
+
+    $tags = $object['tags'];
+    $res = [];
+    $ob = [];
+
+    foreach ( $tags as $x ) {
+        $tag_id = (int) $x;
+        $tag = get_tag( $tag_id );
+        if( is_wp_error( $tag ) ) {
+            $res[] = '';
+        } else {
+            $ob['name'] = isset( $tag->name ) ? $tag->name : '';
+            $ob['id'] = isset( $tag->term_id ) ? $tag->term_id : '';
+            $ob['slug'] = isset( $tag->slug ) ? $tag->slug : '';
+            $res[] = $ob;
+        }
+    }
+    return $res;
 }
