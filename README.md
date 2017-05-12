@@ -1,3 +1,8 @@
+<p align="center">
+<a href="https://rtcamp.com" target="_blank"><img width="200"src="https://rtcamp.com/wp-content/uploads/2016/06/rtcamp-logo.svg"></a>
+</p>
+
+
 # VueTheme - WordPress Theme + VueJs
 WordPress theme using WP REST API and [VueJs 2](http://vuejs.org) by [rtCamp](https://rtcamp.com).
 This theme is base theme for WordPress theme developers.
@@ -28,3 +33,8 @@ This theme is base theme for WordPress theme developers.
 * [Webpack](https://webpack.js.org/)
 * [Foundation CSS Grid](http://foundation.zurb.com/grid.html)
 * [Gulp](http://gulpjs.com/)
+
+<p align="center">
+<a href="https://wordpress.org" target="_blank"><img width="200"src="https://s.w.org/about/images/logos/wordpress-logo-hoz-rgb.png"></a>
+<a href="https://vuejs.org" target="_blank"><img width="50"src="https://vuejs.org/images/logo.png"></a>
+</p>
