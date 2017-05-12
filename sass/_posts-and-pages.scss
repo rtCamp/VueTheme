@@ -56,6 +56,22 @@
 
 		}
 
+		.rt-tag-list{
+			a{
+				display: inline-block;
+				margin: rem-calc(5);
+				padding: rem-calc(2);
+				border-radius: rem-calc(5);
+				background-color: #bcbcbc;
+				color: $black;
+
+				&:hover{
+					opacity: 0.8;
+				}
+
+			}
+		}
+
 	}
 
 }

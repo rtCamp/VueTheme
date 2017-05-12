@@ -94,9 +94,9 @@ function rt_vue_title( $title, $sep, $seplocation ) {
 }
 
 // Extend rest response
-add_action( 'rest_api_init', 'rt_add_thumbnail' );
+add_action( 'rest_api_init', 'rt_extend_rest_post_response' );
 
-function rt_add_thumbnail() {
+function rt_extend_rest_post_response() {
 
 	// Add featured image
 	register_rest_field( 'post',
@@ -115,6 +115,15 @@ function rt_add_thumbnail() {
 			'update_callback' => null,
 			'schema'          => null,
 			 )
+	);
+
+	register_rest_field( 'post',
+		'tag_name',
+		array(
+			'get_callback'    => 'rt_get_tag_name',
+			'update_callback' => null,
+			'schema'          => null,
+			)
 	);
 
 }
@@ -148,4 +157,25 @@ function rt_get_cat_name( $object, $field_name, $request ) {
 	}
 	return $res;
 
+}
+
+function rt_get_tag_name( $object, $field_name, $request ) {
+
+	$tags = $object['tags'];
+	$res = [];
+	$ob = [];
+
+	foreach ( $tags as $x ) {
+		$tag_id = (int) $x;
+		$tag = get_tag( $tag_id );
+		if ( is_wp_error( $tag ) ) {
+			$res[] = '';
+		} else {
+			$ob['name'] = isset( $tag->name ) ? $tag->name : '';
+			$ob['id'] = isset( $tag->term_id ) ? $tag->term_id : '';
+			$ob['slug'] = isset( $tag->slug ) ? $tag->slug : '';
+			$res[] = $ob;
+		}
+	}
+	return $res;
 }

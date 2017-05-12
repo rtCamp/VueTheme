@@ -49,7 +49,7 @@ export default {
 
 		if ( vm.$route.params.name ) {
 
-			vm.getCatId( vm.$route.params.name );
+			vm.getTagId( vm.$route.params.name );
 
 		}
 
@@ -62,7 +62,7 @@ export default {
 			loaded: 'false',
 			pageTitle: '',
 			totalCount: '',
-			catName: ''
+			tagName: ''
 
 		};
 
@@ -70,44 +70,44 @@ export default {
 
 	methods: {
 
-		getPosts: function( catId ) {
+		getPosts: function( tagId ) {
 
 			const vm = this;
 			vm.loaded = 'false';
 			vm.$http.get( 'wp/v2/posts', {
-				params: { categories: catId }
+				params: { tags: tagId }
 			} )
-			.then( ( res ) => {
+				.then( ( res ) => {
 
-				vm.posts = res.data;
+					vm.posts = res.data;
 
-				vm.loaded = 'true';
+					vm.loaded = 'true';
 
-				vm.pageTitle = 'Category' + ' - ' + vm.catName;
+					vm.pageTitle = 'Tag' + ' - ' + vm.tagName;
 
-				vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
+					vm.$store.commit( 'rtChangeTitle', vm.pageTitle );
 
-			} )
-			.catch( ( res ) => {
-				//console.log( `Something went wrong : ${ res }` );
-			} );
+				} )
+				.catch( ( res ) => {
+					//console.log( `Something went wrong : ${ res }` );
+				} );
 
 		},
-		getCatId: function( name ) {
+		getTagId: function( name ) {
 			const vm = this;
-			vm.catName = name;
+			vm.tagName = name;
 			vm.loaded = 'false';
-			vm.$http.get( 'wp/v2/categories/?slug=' + name )
-			.then( ( res ) => {
+			vm.$http.get( 'wp/v2/tags/?slug=' + name )
+				.then( ( res ) => {
 
-				res = res.data[ 0 ];
-				vm.totalCount = ( res.data );
-				vm.getPosts( res.id );
+					res = res.data[ 0 ];
+					vm.totalCount = ( res.data );
+					vm.getPosts( res.id );
 
-			} )
-			.catch( ( res ) => {
-				//console.log( `Something went wrong : ${ res }` );
-			} );
+				} )
+				.catch( ( res ) => {
+					//console.log( `Something went wrong : ${ res }` );
+				} );
 		},
 		formatDate: function( value ) {
 

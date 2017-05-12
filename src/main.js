@@ -28,6 +28,8 @@ import page from './components/page.vue';
 Vue.component( 'page', page );
 import category from './components/category.vue';
 Vue.component( 'category', category );
+import tag from './components/tag.vue';
+Vue.component( 'tag', tag );
 //Create main vue component
 const App = Vue.extend( {
 	template: '<div id="page" class="hfeed site"><theme-header></theme-header>' +
@@ -47,6 +49,7 @@ const router = new VueRouter( {
 		{ path: '/blog/:name', name: 'post', component: post },
 		{ path: '/page/:name', name: 'page', component: page },
 		{ path: '/category/:name', name: 'cat', component: category },
+		{ path: '/tag/:name', name: 'tag', component: tag },
 		{ path: '/', redirect: '/blog' },
 
 	]
