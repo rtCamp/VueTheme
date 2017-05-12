@@ -81,8 +81,6 @@ export default {
 
 				vm.posts = res.data;
 
-				vm.totalPages = res.headers[ 'x-wp-totalpages' ];
-
 				vm.loaded = 'true';
 
 				vm.pageTitle = 'Category' + ' - ' + vm.catName;
@@ -129,14 +127,7 @@ export default {
 			}
 
 		}
-	},
-	watch: {
-
-		'$route'( to, from ) {
-			this.getPosts( this.$route.params.page );
-		}
-
-	},
+	}
 
 };
 </script>
