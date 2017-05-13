@@ -72,6 +72,7 @@ Vue.filter( 'formatDate', function( value ) {
 		return monthNames[ monthIndex ] + ',' + day + ' ' + year;
 	}
 } );
+
 //Define vuex store
 const store = new Vuex.Store( {
 	state: {
