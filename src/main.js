@@ -42,7 +42,7 @@ const App = Vue.extend( {
 //Define route for vue app
 //ref : http://router.vuejs.org/en/
 const router = new VueRouter( {
-
+	mode: 'history',
 	routes: [
 
 		{ path: '/blog/:page(\\d+)?', name: 'home', component: posts },
@@ -55,6 +55,23 @@ const router = new VueRouter( {
 	]
 } );
 
+//Define Filters for app
+Vue.filter( 'formatDate', function( value ) {
+	value = value.date;
+	if ( value ) {
+		const date = new Date( value );
+		const monthNames = [ "January", "February", "March",
+			"April", "May", "June", "July",
+			"August", "September", "October",
+			"November", "December" ];
+
+		const day = date.getDate();
+		const monthIndex = date.getMonth();
+		const year = date.getFullYear();
+
+		return monthNames[ monthIndex ] + ',' + day + ' ' + year;
+	}
+} );
 //Define vuex store
 const store = new Vuex.Store( {
 	state: {
