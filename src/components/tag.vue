@@ -91,8 +91,8 @@ export default {
 				.catch( ( res ) => {
 					//console.log( `Something went wrong : ${ res }` );
 				} );
-
 		},
+
 		getTagId: function( name ) {
 			const vm = this;
 			vm.tagName = name;
@@ -110,22 +110,8 @@ export default {
 				} );
 		},
 		formatDate: function( value ) {
-
-			value = value.date;
-			if ( value ) {
-				const date = new Date( value );
-				const monthNames = [ "January", "February", "March",
-					"April", "May", "June", "July",
-					"August", "September", "October",
-					"November", "December" ];
-
-				const day = date.getDate();
-				const monthIndex = date.getMonth();
-				const year = date.getFullYear();
-
-				return monthNames[ monthIndex ] + ',' + day + ' ' + year;
-			}
-
+			const vm = this;
+			return vm.$options.filters.formatDate( value );
 		}
 	}
 
