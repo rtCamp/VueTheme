@@ -81,6 +81,8 @@ export default {
 				type = 'cat'
 			} else if (object === 'post') {
 				type = 'post'
+			} else if (object === 'tag') {
+				type = 'tag'
 			}
 			return type
 		},
