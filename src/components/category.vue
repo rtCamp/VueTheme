@@ -54,6 +54,15 @@ export default {
 		}
 
 	},
+	watch: {
+		'$route' (to, from) {
+			const vm = this
+			console.log('Category param has changed')
+			if (vm.$route.params.name) {
+				vm.getCatId(vm.$route.params.name)
+			}
+		}
+	},
 	data() {
 
 		return {
