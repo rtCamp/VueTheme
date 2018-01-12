@@ -17,7 +17,7 @@ This theme is base theme for WordPress theme developers.
 ## How to use it for development?
 1. Go to your WP theme directory & navigate to VueTheme.
 2. Install dependencies `npm install`
-1. Make sure you add `define( 'RT_VUE_DEV', true );` in `wp-config.php` to get file from webpack dev server.
+1. Make sure you add `define( 'RT_VUE_DEV', true );` in `wp-config.php` to get asset files from webpack dev server.
 3. To start dev server with hot reload `npm run dev`
 4. To create build for production with minification `npm run build`
 
