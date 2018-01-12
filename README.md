@@ -12,13 +12,14 @@ This theme is base theme for WordPress theme developers.
 2. Clone / Download this repo
 3. Activate your theme from WordPress theme's backend
 4. This theme will display menu which has set display location to Primary Menu. 
-5. Make sure you fulfill all the requirements before using theme. (Please see Requirements section)
+5. Make sure you fulfill all the requirements before using theme. (See [Requirements](#requirements))
 
 ## How to use it for development?
 1. Go to your WP theme directory & navigate to VueTheme.
-2. Install dependencies ``npm install``
-3. To start dev server with hot reload ``npm run dev``
-4. To create build for production with minification ``npm run build``
+2. Install dependencies `npm install`
+1. Make sure you add `define( 'RT_VUE_DEV', true );` in `wp-config.php` to get file from webpack dev server.
+3. To start dev server with hot reload `npm run dev`
+4. To create build for production with minification `npm run build`
 
 ## Requirements
 * [WP API Menus plugin](https://wordpress.org/plugins/wp-api-menus/)
