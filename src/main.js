@@ -16,19 +16,19 @@ Vue.config.debug = true;
 Vue.config.devTools = true;
 
 //Import all vue components
-import posts from './components/posts.vue';
+const posts = () => import('./components/posts.vue');
 Vue.component( 'posts', posts );
-import post from './components/post.vue';
+const post = () => import('./components/post.vue');
 Vue.component( 'post', post );
-import header from './components/theme-header.vue';
+const header = () => import('./components/theme-header.vue');
 Vue.component( 'theme-header', header );
-import footer from './components/theme-footer.vue';
+const footer = () => import('./components/theme-footer.vue');
 Vue.component( 'theme-footer', footer );
-import page from './components/page.vue';
+const page = () => import('./components/page.vue');
 Vue.component( 'page', page );
-import category from './components/category.vue';
+const category = () => import('./components/category.vue');
 Vue.component( 'category', category );
-import tag from './components/tag.vue';
+const tag = () => import('./components/tag.vue');
 Vue.component( 'tag', tag );
 //Create main vue component
 const App = Vue.extend( {
