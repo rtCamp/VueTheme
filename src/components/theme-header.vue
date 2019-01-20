@@ -23,7 +23,7 @@
 
 					<ul>
 						<li v-for="item in menus" v-if="item.type != 'custom'">
-							 <router-link :to="{ name: 'page', params: { name: getUrlName( item.url ) }}"> {{ item.title }} </router-link>
+							 <router-link :to="{ name: getRouteType(item.object), params: { name: getUrlName( item.url ) }}"> {{ item.title }} </router-link>
 						</li>
 
 					</ul>
@@ -74,6 +74,17 @@ export default {
 
 			const array = url.split( '/' );
 			return array[ array.length - 2 ];
+		},
+		getRouteType: function( object ) {
+			let type = 'page'
+			if (object === 'category') {
+				type = 'cat'
+			} else if (object === 'post') {
+				type = 'post'
+			} else if (object === 'tag') {
+				type = 'tag'
+			}
+			return type
 		},
 		toggleMenu: function() {
 			//console.log("Clicked" + this.isActive);
